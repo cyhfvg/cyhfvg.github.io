@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>标签: reversing-enging - toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="cyhfvg&amp;#39;s Blog."><meta property="og:type" content="blog"><meta property="og:title" content="toBePenTester"><meta property="og:url" content="https://cyhfvg.github.io/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="cyhfvg&amp;#39;s Blog."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="cyhfvg blog"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io"},"headline":"toBePenTester","image":["https://cyhfvg.github.io/img/og_image.png"],"author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"cyhfvg&#39;s Blog."}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">标签</a></li><li class="is-active"><a href="#" aria-current="page">reversing-enging</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-02-10T00:43:00.000Z" title="2/10/2022, 8:43:00 AM">2022-02-10</time>发表</span><span class="level-item"><time dateTime="2022-02-10T00:43:00.000Z" title="2/10/2022, 8:43:00 AM">2022-02-10</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a></span><span class="level-item">4 分钟读完 (大约584个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/reversing-enging-0x01/">reversing-enging-0x01</a></h1><div class="content"><h1 id="buffer-overflow"><a href="#buffer-overflow" class="headerlink" title="buffer overflow"></a>buffer overflow</h1><p><code>HTB:You know 0xDiablos</code>:<code>bof</code>.<br/></p>
+<h2 id="Linux-x86-内存结构"><a href="#Linux-x86-内存结构" class="headerlink" title="Linux x86 内存结构"></a>Linux x86 内存结构</h2><p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/b932dbb411b24e7f8592560d5fb1fb1f.png" alt="Linux x86 内存结构" title="linux x86"></p>
+<p>一个函数被调用时，传递给此函数的参数(<code>name-parameter</code>)以及此函数的局部变量会被<code>push</code>到<code>stack段</code>的
+栈顶。<br/></p>
+<p>当一个函数有多个入参时，会倒序<code>push</code>到<code>stack段</code>中，如<code>funcA(1, 2, 3)</code>，会以
+<code>push(3);push(2);push(1)</code>的方式<code>push</code>到<code>stack</code>中。<br/></p>
+<p>调用的函数(A)入栈后，应该持有一个地址，用于函数(A)执行完成后，继续运行的下一行
+代码的地址(<code>return address</code>)。<br/></p>
+<p>全部内容入栈后，会将<code>栈底指针EBP(extended base pointer)</code>入栈,说明当前位置是栈底
+。此处<code>栈底</code>的定义是针对入栈后正在运行的函数(A)而言的，因为，函数(A)的内部变量
+也需要入栈，入的是以<code>EBP</code>为底的栈。<br/></p>
+<h2 id="举例理解"><a href="#举例理解" class="headerlink" title="举例理解"></a>举例理解</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line"><span class="number">1</span>  <span class="type">char</span> buffer [<span class="number">256</span>];</span><br><span class="line"><span class="number">2</span>  funcA(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line"><span class="number">3</span>  otherStatement;</span><br><span class="line"><span class="number">4</span>  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当以上程序<br/>
+执行<code>1</code>行时，<code>buffer</code>入栈。<br/>
+执行<code>2</code>行时，作为入参(name-parameter):<code>3</code>入栈、<code>2</code>入栈、<code>1</code> 入栈;作为返回地址
+(return address),下一行代码(<code>3</code>行)的地址入栈。<br/>
+<code>funcA</code>函数相关信息入栈完毕，<code>EBP</code>入栈,标识此处是栈底。<br/>
+椄下来是<code>funcA</code>内部变量，会以<code>EBP</code>作为栈底，入栈。<br>
+比较特殊的是，<code>main</code>函数的入参在<code>kernel段</code>中，而不是<code>stack</code>段。</p>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/f2848dc22343445597a7788cd99b6d9e.png" alt="以上程序stack段图" title="funcA&#39;s stack"></p>
+<h2 id="缓冲区溢出攻击过程"><a href="#缓冲区溢出攻击过程" class="headerlink" title="缓冲区溢出攻击过程"></a>缓冲区溢出攻击过程</h2><p><code>buffer</code>溢出攻击过程就是栈溢出攻击过程。<code>buffer</code>在填充的时候，由低地址向高地址
+填充。</p>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/34f7c02687b44fe58da0157c4124168d.png" alt="buffer正常填充" title="buffer 正常填充"></p>
+<p><code>buffer</code>填充过量(溢出)，就是栈溢出，当人为控制溢出的内容时，就是<code>缓冲区溢出攻击</code>。</p>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/7ada7ccbdd90445a837a0f480d5d56fc.png" alt="buffer溢出攻击" title="buffer溢出攻击"></p>
+<p>根据以上图，<code>funcA</code>执行完毕后，根据<code>return address</code>与<code>name-parameter</code>执行<code>bad func</code>了，而不是预计的<code>funcA 的3行</code>，这就是<code>缓冲区溢出攻击</code>。</p>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/reversing-enging/">reversing-enging, </a><a class="link-muted" rel="tag" href="/tags/buffer-overflow/">buffer overflow </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-02-03T09:30:21.000Z" title="2/3/2022, 5:30:21 PM">2022-02-03</time>发表</span><span class="level-item"><time dateTime="2022-02-04T07:30:21.000Z" title="2/4/2022, 3:30:21 PM">2022-02-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/tool/">tool</a></span><span class="level-item">2 分钟读完 (大约310个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/reversing-enging-0x00/">reversing-enging 0x00</a></h1><div class="content"><h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><ul>
+<li>file</li>
+<li>ghidra</li>
+<li>strings</li>
+<li>ltrace</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ltrace ./cmd</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>gdb</p>
+<p>  with plugin <code>pwndbg</code></p>
+<ul>
+<li><p>info</p>
+<ul>
+<li><p>i b</p>
+<p>  <code>info break</code>,查看所有断点信息</p>
+</li>
+<li><p>i r</p>
+<p>  <code>info registers</code>,查看各寄存器当前值</p>
+</li>
+<li><p>i f</p>
+<p>  <code>info function</code>,查看所有函数名</p>
+</li>
+</ul>
+</li>
+<li><p>show</p>
+<ul>
+<li><p>show args</p>
+<p>  查看参数</p>
+</li>
+</ul>
+</li>
+<li><p>backtrace</p>
+<p>  查看调用栈</p>
+</li>
+<li><p>执行</p>
+<ul>
+<li><p>run</p>
+<ul>
+<li><p>r</p>
+<p>  重新开始执行</p>
+</li>
+</ul>
+</li>
+<li><p>s</p>
+<p>  源码层面<code>step into</code>，一步</p>
+</li>
+<li><p>si</p>
+<p>  汇编层面<code>step into</code>,一步</p>
+</li>
+<li><p>n</p>
+<p>  源码层面<code>step over</code>，一步</p>
+</li>
+<li><p>ni</p>
+<p>  源码层面<code>step over</code>，一步</p>
+</li>
+<li><p>c</p>
+<p>  continue; continue step debug</p>
+</li>
+<li><p>starti</p>
+<p>  自动<code>run</code>后断在程序入口处</p>
+</li>
+</ul>
+</li>
+<li><p>piebase</p>
+<p>  计算当前程序运行地址</p>
+</li>
+<li><p>piebase 0x1234</p>
+<p>  计算当前程序运行地址+偏移量后的地址</p>
+</li>
+<li><p>断点</p>
+<ul>
+<li><p>break *0x1234</p>
+<p>  给<code>0x1234</code>地址处的指令打断点,<code>*</code>作取地址意</p>
+</li>
+<li><p>break +0x1234</p>
+<p>  在当前位置下0x1234的位置打断点</p>
+</li>
+<li><p>breakrva 0x1234</p>
+<p>  跟据<code>piebase</code>与<code>0x1234</code>偏移量设置断点</p>
+</li>
+<li><p>delete 1</p>
+<p>  删除<code>1</code>号断点;<code>delete</code>为删除所有断点</p>
+</li>
+<li><p>disable 2</p>
+<p>  禁用<code>2</code>号断点;<br/>
+  <code>enable 2</code>为启用2号断点</p>
+</li>
+<li><p>clear</p>
+<p>  清除之后所有断点</p>
+</li>
+</ul>
+</li>
+<li><p>jump *0x1234</p>
+<p>  跳跃执行<code>0x1234</code>处的程序</p>
+</li>
+<li><p>缓冲区溢出相关</p>
+<p>  依赖<a target="_blank" rel="noopener" href="https://github.com/gallopsled/pwntools">pwntools</a>。</p>
+<ul>
+<li><p>cyclic 200</p>
+<p>  生成<code>200</code>位溢出字符</p>
+</li>
+<li><p>cyclic -l ‘AwAA’</p>
+<p>  计算栈溢出偏移量</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>r2</p>
+<p>  aka. <code>radare2</code></p>
+<ul>
+<li><p>aa</p>
+<p>  analyze all</p>
+</li>
+<li><p>afl</p>
+<p>  show functions</p>
+</li>
+<li><p>s main</p>
+<p>  select main function.</p>
+</li>
+<li><p>pdf</p>
+<p>  print selected function’s debug info</p>
+</li>
+</ul>
+</li>
+</ul>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/reversing-enging/">reversing-enging </a></div></div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
