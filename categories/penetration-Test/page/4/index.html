@@ -1,93 +1,143 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>分类: penetration Test - toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="cyhfvg&amp;#39;s Blog."><meta property="og:type" content="blog"><meta property="og:title" content="toBePenTester"><meta property="og:url" content="https://cyhfvg.github.io/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="cyhfvg&amp;#39;s Blog."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="cyhfvg blog"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io"},"headline":"toBePenTester","image":["https://cyhfvg.github.io/img/og_image.png"],"author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"cyhfvg&#39;s Blog."}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分类</a></li><li class="is-active"><a href="#" aria-current="page">penetration Test</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-16T00:36:41.000Z" title="12/16/2021, 8:36:41 AM">2021-12-16</time>发表</span><span class="level-item"><time dateTime="2021-12-16T00:36:41.000Z" title="12/16/2021, 8:36:41 AM">2021-12-16</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">1 分钟读完 (大约212个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-iCanSeeYourABC/">something about Pikachu - iCanSeeYourABC</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
-<h2 id="敏感信息泄漏"><a href="#敏感信息泄漏" class="headerlink" title="敏感信息泄漏"></a>敏感信息泄漏</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>由于后台人员疏忽或者不当的设计，导致不应该被用户察觉到的数据被轻松访问。<br>
-例如:<br></p>
-<ul>
-<li><p>通过URL列出服务器的目录结构</p>
-</li>
-<li><p>请求中包含错误参数时，报错信息中包含<code>系统</code>,<code>中间件</code>,<code>开发语言</code>的版本或其它信息</p>
-</li>
-<li><p>前端源码中包含敏感信息,例如<code>后台登录地址</code>,<code>内网接口信息</code>,<code>测试帐号/密码</code>等</p>
-</li>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>分类: penetration Test - toBePenTester</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="toBePenTester"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="toBePenTester"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="cyhfvg&amp;#39;s Blog."><meta property="og:type" content="blog"><meta property="og:title" content="toBePenTester"><meta property="og:url" content="https://cyhfvg.github.io/"><meta property="og:site_name" content="toBePenTester"><meta property="og:description" content="cyhfvg&amp;#39;s Blog."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://cyhfvg.github.io/img/og_image.png"><meta property="article:author" content="cyhfvg"><meta property="article:tag" content="cyhfvg blog"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://cyhfvg.github.io"},"headline":"toBePenTester","image":["https://cyhfvg.github.io/img/og_image.png"],"author":{"@type":"Person","name":"cyhfvg"},"publisher":{"@type":"Organization","name":"toBePenTester","logo":{"@type":"ImageObject","url":{"text":"I wanna be the guy."}}},"description":"cyhfvg&#39;s Blog."}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/">I wanna be the guy.</a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分类</a></li><li class="is-active"><a href="#" aria-current="page">penetration Test</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-02-03T09:30:21.000Z" title="2/3/2022, 5:30:21 PM">2022-02-03</time>发表</span><span class="level-item"><time dateTime="2022-02-04T07:30:21.000Z" title="2/4/2022, 3:30:21 PM">2022-02-04</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/tool/">tool</a></span><span class="level-item">2 分钟读完 (大约310个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/reversing-enging-0x00/">reversing-enging 0x00</a></h1><div class="content"><h1 id="Tools"><a href="#Tools" class="headerlink" title="Tools"></a>Tools</h1><ul>
+<li>file</li>
+<li>ghidra</li>
+<li>strings</li>
+<li>ltrace</li>
 </ul>
-<h3 id="I-can-see-your-ABC"><a href="#I-can-see-your-ABC" class="headerlink" title="I can see your ABC"></a>I can see your ABC</h3><p>此次漏洞表现为在前端源码中暴露了测试帐号/密码。<br>
-审查元素中检索<code>test</code>,<code>admin</code>,<code>123456</code>,<code>测试</code>,<code>帐号</code>，<code>密码</code>,<code>password</code>,<code>passwd</code>等内容，
-有可能会有发现。</p>
-<p>此次测试帐号为<code>lili/123456</code>。</p>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/infoleak/">infoleak </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-15T01:07:10.000Z" title="12/15/2021, 9:07:10 AM">2021-12-15</time>发表</span><span class="level-item"><time dateTime="2021-12-15T01:07:10.000Z" title="12/15/2021, 9:07:10 AM">2021-12-15</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">2 分钟读完 (大约267个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-traverse-directory/">something about Pikachu - traverse directory</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
-<h2 id="目录遍历"><a href="#目录遍历" class="headerlink" title="目录遍历"></a>目录遍历</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在Web设计时将需要访问的文件定义为变量，由前端传递真正想要访问的文件名，从而使前端功能更加便利时，可能会
-引起<code>目录遍历漏洞</code>。那是由于，后台没有对前端传递的值进行严格的安全考虑，导致攻击者可以通过<code>../</code>相对目录的方式
-遍历服务器其它目录文件列表。<br></p>
-<p><code>目录遍历漏洞</code>与<code>不安全的文件下载</code>或<code>文件包含漏洞</code>相似，只是出现的位置与表现不同。<br></p>
-<p>另外，以<code>http://abc/dir</code>方式直接列出<code>dir</code>目录中的内容，这种情况称之为<code>敏感信息泄漏</code>,不归类于<code>目录遍历</code>。</p>
-<h3 id="目录遍历-1"><a href="#目录遍历-1" class="headerlink" title="目录遍历"></a>目录遍历</h3><p>直接将url中的<code>title=abc.php</code>参数，更换为<code>title=../xxx</code>就可实现访问其它文件。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://train.com/pikachu/vul/dir/dir_list.php?title=../dir.php</span><br></pre></td></tr></table></figure>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/%E7%9B%AE%E5%BD%95%E9%81%8D%E5%8E%86/">目录遍历 </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-14T14:47:45.000Z" title="12/14/2021, 10:47:45 PM">2021-12-14</time>发表</span><span class="level-item"><time dateTime="2021-12-14T14:47:45.000Z" title="12/14/2021, 10:47:45 PM">2021-12-14</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">3 分钟读完 (大约505个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-Over-Permission/">something about Pikachu - Over Permission</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
-<h2 id="Over-Permission"><a href="#Over-Permission" class="headerlink" title="Over Permission"></a>Over Permission</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>如果使用 <em><strong>低权限</strong></em> A用户的权限去操作 <em><strong>高权限</strong></em> B用户的数据，如果能够成功操作，则称之为越权操作。<br></p>
-<p>越权漏洞形成的原因是后台使用了 <strong>不合理的权限校验规则</strong> 。<br></p>
-<p>越权漏洞容易出现在权限页面(需要登录的页面)中增、删、改、查的地方，进行这些操作时，
-后台需要进行合理的权限校验。</p>
-<p>权限管理应当遵守:</p>
-<ul>
-<li>使用最小权限原则对用户进行赋权</li>
-<li>使用合理(严格)的权限校验规则</li>
-<li>使用后台登录状态作为条件进行权限判断，不盲目使用前端传递的条件判断条件</li>
-</ul>
-<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>水平越权指的是 <em>相同权限</em> 下的 <em>不同用户</em> 可以相互访问<br></p>
-<p>登录<code>lucy/123456</code>用户后，查看个人信息时，会向<code>/pikachu/vul/overpermission/op1/op1_mem.php?username=lucy&amp;submit=点击查看个人信息</code>请求数据。<br>
-可以观察到<code>username=lucy</code>参数，将其更换为同权限的其他用户名即可获得其他用户的信息。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 使用`lucy`身份，查看`lili`用户信息</span><br><span class="line">http://train.com/pikachu/vul/overpermission/op1/op1_mem.php?username=lili&amp;submit=点击查看个人信息</span><br></pre></td></tr></table></figure>
-
-<h3 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h3><p>垂直越权指的是使用 <em>低权限用户</em> 可以访问到 <em>高权限用户</em> 。</p>
-<p>登录<code>admin/123456</code>用户，添加用户时可以查看到<code>URL</code>为:</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/pikachu/vul/overpermission/op2/op2_admin_edit.php</span> <span class="meta">HTTP/1.1</span></span><br><span class="line">username=qwe&amp;password=qweqwe&amp;sex=&amp;phonenum=&amp;email=&amp;address=&amp;submit=%E5%88%9B%E5%BB%BA</span><br></pre></td></tr></table></figure>
-<p>后台获得参数后直接插入，没有权限验证。因此登录<code>pikachu/000000</code>这个只有<code>查看权限</code>的用户后，
-直接访问<code>http://train.com/pikachu/vul/overpermission/op2/op2_admin_edit.php</code>页面，即可进入
-<code>添加用户</code>页面，并且能够正常添加用户。</p>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/over-permission/">over permission </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-12T14:40:02.000Z" title="12/12/2021, 10:40:02 PM">2021-12-12</time>发表</span><span class="level-item"><time dateTime="2021-12-12T14:40:02.000Z" title="12/12/2021, 10:40:02 PM">2021-12-12</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">3 分钟读完 (大约446个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-Unsafe-Fileupload/">something about Pikachu - Unsafe Fileupload</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
-<h2 id="Unsafe-Fileupload"><a href="#Unsafe-Fileupload" class="headerlink" title="Unsafe Fileupload"></a>Unsafe Fileupload</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在web应用系统中<code>文件上传功能</code>很常见，比如上传头像，上传附件等。<br>
-当后台程序对上传的文件进行的安全判断条件不够严谨时，攻击者可能会上传一些恶意文件，导致造成损失。</p>
-<p>在设计文件上传功能时，要对以下方面进行安全考虑。</p>
-<ul>
-<li><p>验证文件类型，后缀名，大小</p>
-</li>
-<li><p>验证文件上传方式</p>
-</li>
-<li><p>对文件进行一定复杂程度的重命名</p>
-</li>
-<li><p>不要暴露文件上传后的路径</p>
-</li>
-</ul>
-<h3 id="client-check"><a href="#client-check" class="headerlink" title="client check"></a>client check</h3><p>是客户端<code>javascript</code>限制，因此将对应触发语句去除即可。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 去除onchange函数 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;uploadfile&quot;</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;uploadfile&quot;</span> <span class="attr">onchange</span>=<span class="string">&quot;checkFileExt(this.value)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="MIME-type"><a href="#MIME-type" class="headerlink" title="MIME type"></a>MIME type</h3><ul>
-<li><p>更改文件后缀名</p>
-<p>  是服务端进行<code>MIME</code>判定，因此将恶意文件重命名为<code>bad.png</code>上传，此时<code>MIME</code>为<code>图片</code>。
-  使用<code>burpsuite</code>截断后将文件名再更改为<code>bad.php</code>。</p>
-</li>
-<li><p>更改<code>HTTP Content-Type</code></p>
-<p>  直接上传<code>bad.php</code>，使用<code>burpsuite</code>截断后将<code>HTTP</code>请求的<code>Content-Type</code>更改为<code>image/png</code>。</p>
-</li>
-</ul>
-<h3 id="getimagesize"><a href="#getimagesize" class="headerlink" title="getimagesize"></a>getimagesize</h3><p><code>getimagesize()</code>函数能够获取文件头类型。</p>
-<a href="/something-about-DVWA-File-Upload/" title="文件头类型(# 文件头)">文件头类型(# 文件头)</a>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ltrace ./cmd</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p>添加伪造文件头</p>
-<p>  在恶意文件中添加对应的文件头信息，即可伪装为对应的文件。</p>
-  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 伪造image文件头</span></span><br><span class="line">GIF98</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    <span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>附加恶意内容</p>
-<p>  上传正常图片文件,使用<code>burpsuite</code>截断，在请求内容中追加恶意代码。然后利用<code>文件包含漏洞</code>将此文件包含,即可执行隐藏的代码。</p>
-  <figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Content-Disposition</span><span class="punctuation">: </span>form-data; name=&quot;uploadfile&quot;; filename=&quot;badimg.png&quot;</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>image/png</span><br><span class="line"></span><br><span class="line">PNG</span><br><span class="line"></span><br><span class="line">XXXXX....YYYYYY...ZZZ</span><br><span class="line">&lt;?php phpinfo(); ?&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>gdb</p>
+<p>  with plugin <code>pwndbg</code></p>
+<ul>
+<li><p>info</p>
+<ul>
+<li><p>i b</p>
+<p>  <code>info break</code>,查看所有断点信息</p>
+</li>
+<li><p>i r</p>
+<p>  <code>info registers</code>,查看各寄存器当前值</p>
+</li>
+<li><p>i f</p>
+<p>  <code>info function</code>,查看所有函数名</p>
+</li>
 </ul>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/file-upload/">file upload, </a><a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-12-11T00:37:51.000Z" title="12/11/2021, 8:37:51 AM">2021-12-11</time>发表</span><span class="level-item"><time dateTime="2021-12-11T00:37:51.000Z" title="12/11/2021, 8:37:51 AM">2021-12-11</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a><span> / </span><a class="link-muted" href="/categories/penetration-Test/train/">train</a></span><span class="level-item">1 分钟读完 (大约191个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/something-about-Pikachu-Unsafe-Filedownload/">something about Pikachu - Unsafe Filedownload</a></h1><div class="content"><h1 id="pikachu"><a href="#pikachu" class="headerlink" title="pikachu"></a>pikachu</h1><p><a target="_blank" rel="noopener" href="https://github.com/zhuifengshaonianhanlu/pikachu">pikachu</a>    =&gt; <a target="_blank" rel="noopener" href="https://github.com/to-be-the-one/pikachu">备份地址</a></p>
-<h2 id="Unsafe-Filedownload"><a href="#Unsafe-Filedownload" class="headerlink" title="Unsafe Filedownload"></a>Unsafe Filedownload</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>不安全的文件下载，一般用户点击下载链接，便会向后台发送一个请求，此请求包含需要下载的文件名称，后台接收到请求后返回对应<code>response</code>。
-当后台直接将<code>文件名</code>拼接至<code>路径</code>中，而不对其进行安全判断，则可能会引发<code>Unsafe Filedownload</code>漏洞。因为攻击者可能会构造一个恶意
-文件名，从而获取敏感信息。</p>
-<h3 id="不安全的文件下载"><a href="#不安全的文件下载" class="headerlink" title="不安全的文件下载"></a>不安全的文件下载</h3><p>根据特征，构造恶意文件名<code>../../../README.md</code>，从而获取<code>pikachu</code>的<code>README</code>文件。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/pikachu/vul/unsafedownload/execdownload.php?filename=../../../README.md</span><br></pre></td></tr></table></figure>
-</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/pikachu/">pikachu, </a><a class="link-muted" rel="tag" href="/tags/file-download/">file download </a></div></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/categories/penetration-Test/page/3/">上一页</a></div><div class="pagination-next"><a href="/categories/penetration-Test/page/5/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/categories/penetration-Test/">1</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/2/">2</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/3/">3</a></li><li><a class="pagination-link is-current" href="/categories/penetration-Test/page/4/">4</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/5/">5</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/categories/penetration-Test/page/9/">9</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+</li>
+<li><p>show</p>
+<ul>
+<li><p>show args</p>
+<p>  查看参数</p>
+</li>
+</ul>
+</li>
+<li><p>backtrace</p>
+<p>  查看调用栈</p>
+</li>
+<li><p>执行</p>
+<ul>
+<li><p>run</p>
+<ul>
+<li><p>r</p>
+<p>  重新开始执行</p>
+</li>
+</ul>
+</li>
+<li><p>s</p>
+<p>  源码层面<code>step into</code>，一步</p>
+</li>
+<li><p>si</p>
+<p>  汇编层面<code>step into</code>,一步</p>
+</li>
+<li><p>n</p>
+<p>  源码层面<code>step over</code>，一步</p>
+</li>
+<li><p>ni</p>
+<p>  源码层面<code>step over</code>，一步</p>
+</li>
+<li><p>c</p>
+<p>  continue; continue step debug</p>
+</li>
+<li><p>starti</p>
+<p>  自动<code>run</code>后断在程序入口处</p>
+</li>
+</ul>
+</li>
+<li><p>piebase</p>
+<p>  计算当前程序运行地址</p>
+</li>
+<li><p>piebase 0x1234</p>
+<p>  计算当前程序运行地址+偏移量后的地址</p>
+</li>
+<li><p>断点</p>
+<ul>
+<li><p>break *0x1234</p>
+<p>  给<code>0x1234</code>地址处的指令打断点,<code>*</code>作取地址意</p>
+</li>
+<li><p>break +0x1234</p>
+<p>  在当前位置下0x1234的位置打断点</p>
+</li>
+<li><p>breakrva 0x1234</p>
+<p>  跟据<code>piebase</code>与<code>0x1234</code>偏移量设置断点</p>
+</li>
+<li><p>delete 1</p>
+<p>  删除<code>1</code>号断点;<code>delete</code>为删除所有断点</p>
+</li>
+<li><p>disable 2</p>
+<p>  禁用<code>2</code>号断点;<br/>
+  <code>enable 2</code>为启用2号断点</p>
+</li>
+<li><p>clear</p>
+<p>  清除之后所有断点</p>
+</li>
+</ul>
+</li>
+<li><p>jump *0x1234</p>
+<p>  跳跃执行<code>0x1234</code>处的程序</p>
+</li>
+<li><p>缓冲区溢出相关</p>
+<p>  依赖<a target="_blank" rel="noopener" href="https://github.com/gallopsled/pwntools">pwntools</a>。</p>
+<ul>
+<li><p>cyclic 200</p>
+<p>  生成<code>200</code>位溢出字符</p>
+</li>
+<li><p>cyclic -l ‘AwAA’</p>
+<p>  计算栈溢出偏移量</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>r2</p>
+<p>  aka. <code>radare2</code></p>
+<ul>
+<li><p>aa</p>
+<p>  analyze all</p>
+</li>
+<li><p>afl</p>
+<p>  show functions</p>
+</li>
+<li><p>s main</p>
+<p>  select main function.</p>
+</li>
+<li><p>pdf</p>
+<p>  print selected function’s debug info</p>
+</li>
+</ul>
+</li>
+</ul>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/reversing-enging/">reversing-enging </a></div></div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-01-15T08:29:16.000Z" title="1/15/2022, 4:29:16 PM">2022-01-15</time>发表</span><span class="level-item"><time dateTime="2022-01-15T08:29:16.000Z" title="1/15/2022, 4:29:16 PM">2022-01-15</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/penetration-Test/">penetration Test</a></span><span class="level-item">1 分钟读完 (大约115个字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/hack-the-box-0x01/">hack the box 0x01</a></h1><div class="content"><h1 id="Hack-The-Box"><a href="#Hack-The-Box" class="headerlink" title="Hack The Box"></a>Hack The Box</h1><p>注册了<code>hack the box</code>,跟随<code>Start point</code>，得到了第一台机器(Meow)最终的flag,竟然非
+常喜悦。 使用 <code>nmap</code>扫描端口，获得<code>23</code>端口存活，服务是<code>telnet</code>。使用
+<code>metasploit</code>的 <code>telnet_login</code>模块，暴破了用户/密码(root/root)。</p>
+<h2 id="总结步骤"><a href="#总结步骤" class="headerlink" title="总结步骤"></a>总结步骤</h2><ul>
+<li><p>nmap端口扫描</p>
+<p>  使用<code>nmap</code>扫描端口，获得信息。</p>
+</li>
+<li><p>metasploit工具暴破</p>
+<p>  根据获得的信息，选择对应工具。</p>
+</li>
+</ul>
+</div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/HTB/">HTB </a></div></div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/categories/penetration-Test/page/3/">上一页</a></div><div class="pagination-next"><a href="/categories/penetration-Test/page/5/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/categories/penetration-Test/">1</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/2/">2</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/3/">3</a></li><li><a class="pagination-link is-current" href="/categories/penetration-Test/page/4/">4</a></li><li><a class="pagination-link" href="/categories/penetration-Test/page/5/">5</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/categories/penetration-Test/page/21/">21</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2023/12/"><span class="level-start"><span class="level-item">十二月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/11/"><span class="level-start"><span class="level-item">十一月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/09/"><span class="level-start"><span class="level-item">九月 2023</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2023/08/"><span class="level-start"><span class="level-item">八月 2023</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">五月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">二月 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">一月 2022</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">十二月 2021</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">十一月 2021</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/10/"><span class="level-start"><span class="level-item">十月 2021</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/05/"><span class="level-start"><span class="level-item">五月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/03/"><span class="level-start"><span class="level-item">三月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><!--!--></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/">I wanna be the guy.</a><p class="is-size-7"><span>&copy; 2023 cyhfvg</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/cyhfvg"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
                     clipboard: true,
